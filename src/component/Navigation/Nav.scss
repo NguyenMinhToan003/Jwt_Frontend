@@ -9,7 +9,11 @@ ul {
 li {
   float: left;
 }
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 li a {
   display: block;
   color: white;
@@ -24,4 +28,11 @@ li a:hover:not(.active) {
 
 .active {
   background-color: #04aa6d;
+}
+.nav {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }

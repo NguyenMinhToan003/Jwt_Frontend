@@ -1,6 +1,7 @@
 import React from "react";
 import Nav from "./component/Navigation/Nav";
 import Login from "./component/Login/Login";
+import SignUp from "./component/Signup/signup";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           <Route path="/news">news</Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
           </Route>
           <Route path="*">404 not found</Route>
         </Switch>

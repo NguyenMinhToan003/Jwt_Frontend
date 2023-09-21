@@ -1,0 +1,41 @@
+.brand {
+  font-size: 46px;
+  color: #1877f2;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Mooli", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+.login-contaier {
+  background-color: #f0f2f5;
+}
+.form-login {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+input {
+  // font-size: 17px;
+  // padding: 14px 16px !important;
+  width: 332px;
+  &::placeholder {
+    font-size: 17px;
+    color: #bdb8b8;
+  }
+}
+.link {
+  color: #1877f2;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.submit {
+  color: white;
+  // background-color: #1877f2;
+  font-size: 20px;
+  line-height: 48px;
+}
