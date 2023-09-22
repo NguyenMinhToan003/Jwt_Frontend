@@ -1,11 +1,65 @@
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-
+import { useState } from "react";
 import "../Signup/signup.scss";
-const SignUp = () => {
-  const handlerGroupId = (event) => {
-    console.log(">>>>>>> check event :", event.target.value);
-  };
+import { toast } from "react-toastify";
 
+const SignUp = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [major, setMajor] = useState("");
+  const [gender, setGender] = useState("");
+  const [name, setName] = useState("");
+  const [repass, setRepass] = useState("");
+  const [objectCheckInput, setObjectCheckInput] = useState({
+    email: true,
+    password: true,
+    major: true,
+    repass: true,
+  });
+
+  const handlerCheckInputs = () => {
+    setObjectCheckInput({
+      email: true,
+      password: true,
+      major: true,
+      repass: true,
+    });
+    if (!email) {
+      setObjectCheckInput({ ...objectCheckInput, email: false });
+      toast.error("no email");
+      return false;
+    }
+    if (!password) {
+      setObjectCheckInput({ ...objectCheckInput, password: false });
+      toast.error("no password");
+      return false;
+    }
+    if (!major) {
+      setObjectCheckInput({ ...objectCheckInput, major: false });
+      toast.error("no major");
+      return false;
+    }
+    if (repass !== password) {
+      setObjectCheckInput({ ...objectCheckInput, repass: false });
+      toast.error("no same password");
+      return false;
+    }
+    let regex =
+      /^[A-Za-z0-9](([a-zA-Z0-9,=.!-#|$%^&*+/?_`{}~]+)*)@(?:[0-9a-zA-Z-]+.)+[a-zA-Z]{2,9}$/;
+    if (!regex.test(email)) {
+      toast.error("error form email");
+      return false;
+    }
+    return true;
+  };
+  const handlerSubmit = (event) => {
+    event.preventDefault();
+    let check = handlerCheckInputs();
+    let userData = { email, name, password, address, phone, major, gender };
+    console.log(">>>>>>: ", userData);
+  };
   return (
     <div className="signup-container py-5">
       <div className="container d-flex ">
@@ -30,53 +84,96 @@ const SignUp = () => {
           <input
             type="email"
             placeholder="Email address"
-            className=" form-control  border border-1 px-3 py-3"
+            className={
+              objectCheckInput.email
+                ? " form-control  border border-1 px-3 py-3 "
+                : " form-control   px-3 py-3 is-invalid"
+            }
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
           />
           <input
             type="text"
             placeholder="Name"
             className=" form-control  border border-1 px-3 py-3"
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
           />
           <input
             type="password"
             placeholder="Password"
-            className=" form-control  border border-1 px-3 py-3"
+            className={
+              objectCheckInput.password
+                ? " form-control  border border-1 px-3 py-3 "
+                : " form-control   px-3 py-3 is-invalid"
+            }
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
           />
           <input
             type="password"
             placeholder="Re-Password"
-            className=" form-control  border border-1 px-3 py-3"
+            className={
+              objectCheckInput.repass
+                ? " form-control  border border-1 px-3 py-3 "
+                : " form-control   px-3 py-3 is-invalid"
+            }
+            onChange={(event) => setRepass(event.target.value)}
           />
           <input
             type="text"
             placeholder="Address"
             className=" form-control  border border-1 px-3 py-3"
+            onChange={(event) => {
+              setAddress(event.target.value);
+            }}
           />
           <input
             type="tel"
             placeholder="Phone"
             className=" form-control  border border-1 px-3 py-3"
+            onChange={(event) => {
+              setPhone(event.target.value);
+            }}
           />
           <select
-            className="form-select  border border-1 px-3 py-3"
+            defaultValue={"DEFAULT"}
+            className="form-select border border-1 px-3 py-3 "
             onChange={(event) => {
-              handlerGroupId(event);
+              setGender(event.target.value);
             }}>
-            <option selected>Choose gender...</option>
-            <option value="0">Male</option>
-            <option value="1">Famale</option>
+            <option selected value="DEFAULT" disabled>
+              Choose gender...
+            </option>
+            <option value={0}>Male</option>
+            <option value={1}>Famale</option>
           </select>
+
           <select
-            className="form-select rounded-3 border border-1 px-3 py-3"
+            defaultValue={"DEFAULT"}
+            className={
+              objectCheckInput.major
+                ? " form-control  border border-1 px-3 py-3 "
+                : " form-control   px-3 py-3 is-invalid"
+            }
             onChange={(event) => {
-              handlerGroupId(event);
+              setMajor(event.target.value);
             }}>
-            <option selected>Choose major...</option>
-            <option value="1">Leader</option>
-            <option value="2">Developer</option>
-            <option value="3">Tester</option>
+            <option selected value="DEFAULT" disabled>
+              Choose major...
+            </option>
+            <option value={1}>Leader</option>
+            <option value={2}>Developer</option>
+            <option value={3}>Tester</option>
           </select>
-          <button type="submit" className="btn btn-primary px-3 py-3 fw-bold">
+
+          <button
+            type="submit"
+            className="btn btn-primary px-3 py-3 fw-bold"
+            onClick={(event) => handlerSubmit(event)}>
             Sign Up
           </button>
         </form>
