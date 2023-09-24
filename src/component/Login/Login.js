@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Login.scss";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+import { loginAccount } from "../../services/registerService";
 
 const Login = (props) => {
+  // const [statusInput, setStatusInput] = useState({ acc: true, pass: true });
+  const [account, setAccount] = useState("");
+  const [password, setPassword] = useState("");
+  const [checkObjectInput, setCheckObejctInput] = useState({
+    account: true,
+    password: true,
+  });
+  const handlerSubmit = async (event) => {
+    event.preventDefault();
+    setCheckObejctInput({ account: true, password: true });
+    if (account === "") {
+      setCheckObejctInput({ ...checkObjectInput, account: false });
+      toast.error("pleass enter your email or phone number ");
+    } else if (password === "") {
+      setCheckObejctInput({ ...checkObjectInput, password: false });
+      toast.error("pleass enter your password");
+    }
+    loginAccount(account, password);
+  };
   return (
     <div className="container d-flex justify-content-center">
       <div className="d-flex  justify-content-center gap-3 row col-12 col-md-5 m-5   ">
@@ -13,16 +34,33 @@ const Login = (props) => {
           <input
             placeholder="Email address or phone number "
             type="text"
-            className="form-control rounded-3 border border-1 px-3 py-4"
+            className={
+              checkObjectInput.account
+                ? "form-control rounded-3 border border-1 px-3 py-4"
+                : "form-control rounded-3  px-3 py-4 is-invalid"
+            }
+            onChange={(event) => {
+              setAccount(event.target.value);
+            }}
           />
           <input
             placeholder="Password"
             type="password"
-            className="form-control rounded-3 border border-1 px-3 py-4"
+            className={
+              checkObjectInput.password
+                ? "form-control rounded-3 border border-1 px-3 py-4"
+                : "form-control rounded-3  px-3 py-4 is-invalid"
+            }
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
           />
           <button
             type="submit"
-            className="submit rounded-3 btn btn-primary fw-bold">
+            className="submit rounded-3 btn btn-primary fw-bold"
+            onClick={(event) => {
+              handlerSubmit(event);
+            }}>
             Login
           </button>
           <div className="d-flex justify-content-center gap-2 link rounded-3">

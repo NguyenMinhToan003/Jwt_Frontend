@@ -1,9 +1,12 @@
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../Signup/signup.scss";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { registerCreateUser } from "../../services/registerService";
 
 const SignUp = () => {
+  let history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
@@ -17,6 +20,7 @@ const SignUp = () => {
     password: true,
     major: true,
     repass: true,
+    phone: true,
   });
 
   const handlerCheckInputs = () => {
@@ -36,16 +40,22 @@ const SignUp = () => {
       toast.error("no password");
       return false;
     }
-    if (!major) {
-      setObjectCheckInput({ ...objectCheckInput, major: false });
-      toast.error("no major");
-      return false;
-    }
     if (repass !== password) {
       setObjectCheckInput({ ...objectCheckInput, repass: false });
       toast.error("no same password");
       return false;
     }
+    if (!major) {
+      setObjectCheckInput({ ...objectCheckInput, major: false });
+      toast.error("no major");
+      return false;
+    }
+    if (!phone) {
+      setObjectCheckInput({ ...objectCheckInput, phone: false });
+      toast.error("no phone number");
+      return false;
+    }
+
     let regex =
       /^[A-Za-z0-9](([a-zA-Z0-9,=.!-#|$%^&*+/?_`{}~]+)*)@(?:[0-9a-zA-Z-]+.)+[a-zA-Z]{2,9}$/;
     if (!regex.test(email)) {
@@ -54,12 +64,28 @@ const SignUp = () => {
     }
     return true;
   };
-  const handlerSubmit = (event) => {
+  const handlerSubmit = async (event) => {
     event.preventDefault();
     let check = handlerCheckInputs();
-    let userData = { email, name, password, address, phone, major, gender };
-    console.log(">>>>>>: ", userData);
+    if (check) {
+      // toast.success("Nice create account");
+      let statusCreate = await registerCreateUser(
+        email,
+        name,
+        password,
+        address,
+        phone,
+        major,
+        gender
+      );
+      let dataServer = statusCreate.data;
+      if (+dataServer.EC === 0) {
+        toast.success(dataServer.EM);
+        history.push("/login");
+      } else toast.error(dataServer.EM);
+    }
   };
+  useEffect(() => {}, []);
   return (
     <div className="signup-container py-5">
       <div className="container d-flex ">
@@ -134,7 +160,11 @@ const SignUp = () => {
           <input
             type="tel"
             placeholder="Phone"
-            className=" form-control  border border-1 px-3 py-3"
+            className={
+              objectCheckInput.phone
+                ? " form-control  border border-1 px-3 py-3 "
+                : " form-control   px-3 py-3 is-invalid"
+            }
             onChange={(event) => {
               setPhone(event.target.value);
             }}
@@ -156,8 +186,8 @@ const SignUp = () => {
             defaultValue={"DEFAULT"}
             className={
               objectCheckInput.major
-                ? " form-control  border border-1 px-3 py-3 "
-                : " form-control   px-3 py-3 is-invalid"
+                ? " form-select  border border-1 px-3 py-3 "
+                : " form-select   px-3 py-3 is-invalid"
             }
             onChange={(event) => {
               setMajor(event.target.value);
