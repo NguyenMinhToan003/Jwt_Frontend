@@ -4,9 +4,10 @@ import "./Login.scss";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loginAccount } from "../../services/registerService";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Login = (props) => {
-  // const [statusInput, setStatusInput] = useState({ acc: true, pass: true });
+  let history = useHistory();
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [checkObjectInput, setCheckObejctInput] = useState({
@@ -15,15 +16,26 @@ const Login = (props) => {
   });
   const handlerSubmit = async (event) => {
     event.preventDefault();
+    let response = await loginAccount(account, password);
+    console.log(">>>>>> check code : ", response.data.EC);
     setCheckObejctInput({ account: true, password: true });
     if (account === "") {
       setCheckObejctInput({ ...checkObjectInput, account: false });
       toast.error("pleass enter your email or phone number ");
     } else if (password === "") {
       setCheckObejctInput({ ...checkObjectInput, password: false });
-      toast.error("pleass enter your password");
+      toast.error("pleass ender your password");
+    } else {
+      if (response && response.data && +response.data.EC === 0) {
+        let data = {
+          author: true,
+          token: "fake token",
+        };
+        sessionStorage.setItem("account", JSON.stringify(data));
+        toast.info(response.data.EM);
+        history.push("/user");
+      } else toast.error(response.data.EM);
     }
-    loginAccount(account, password);
   };
   return (
     <div className="container d-flex justify-content-center">
