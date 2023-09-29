@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Login.scss";
 import { NavLink } from "react-router-dom";
@@ -17,7 +17,6 @@ const Login = (props) => {
   const handlerSubmit = async (event) => {
     event.preventDefault();
     let response = await loginAccount(account, password);
-    console.log(">>>>>> check code : ", response.data.EC);
     setCheckObejctInput({ account: true, password: true });
     if (account === "") {
       setCheckObejctInput({ ...checkObjectInput, account: false });
@@ -37,6 +36,14 @@ const Login = (props) => {
       } else toast.error(response.data.EM);
     }
   };
+
+  useEffect(() => {
+    let session = sessionStorage.getItem("account");
+    if (session) {
+      history.push("/");
+      window.location.reload();
+    }
+  }, []);
   return (
     <div className="container d-flex justify-content-center">
       <div className="d-flex  justify-content-center gap-3 row col-12 col-md-5 m-5   ">

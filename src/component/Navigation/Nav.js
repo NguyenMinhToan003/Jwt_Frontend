@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Nav.scss";
-import { NavLink } from "react-router-dom";
-class Nav extends React.Component {
-  render() {
-    return (
+import { NavLink, useLocation } from "react-router-dom";
+const Nav = () => {
+  const [show, setShow] = useState(true);
+  const location = useLocation();
+  useEffect(() => {
+    // let session = sessionStorage.getItem("account");
+    console.log(">>>> check location: ", location);
+    if (location.pathname === "/login") setShow(false);
+  }, []);
+
+  return (
+    show && (
       <ul className="nav">
         <div className="option">
           <li>
@@ -27,7 +35,7 @@ class Nav extends React.Component {
           </NavLink>
         </div>
       </ul>
-    );
-  }
-}
+    )
+  );
+};
 export default Nav;
