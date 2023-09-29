@@ -33,6 +33,7 @@ const Login = (props) => {
         sessionStorage.setItem("account", JSON.stringify(data));
         toast.info(response.data.EM);
         history.push("/user");
+        window.location.reload();
       } else toast.error(response.data.EM);
     }
   };
@@ -41,7 +42,6 @@ const Login = (props) => {
     let session = sessionStorage.getItem("account");
     if (session) {
       history.push("/");
-      window.location.reload();
     }
   }, []);
   return (

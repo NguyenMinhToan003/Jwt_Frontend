@@ -195,9 +195,9 @@ const SignUp = () => {
             <option selected value="DEFAULT" disabled>
               Choose major...
             </option>
-            <option value={1}>Leader</option>
-            <option value={2}>Developer</option>
-            <option value={3}>Tester</option>
+            <option value={2}>Leader</option>
+            <option value={1}>Developer</option>
+            <option value={3}>Guess</option>
           </select>
 
           <button

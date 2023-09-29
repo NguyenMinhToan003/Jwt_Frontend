@@ -5,9 +5,10 @@ const Nav = () => {
   const [show, setShow] = useState(true);
   const location = useLocation();
   useEffect(() => {
-    // let session = sessionStorage.getItem("account");
     console.log(">>>> check location: ", location);
-    if (location.pathname === "/login") setShow(false);
+    if (location.pathname === "/login") {
+      setShow(false);
+    }
   }, []);
 
   return (
@@ -20,10 +21,10 @@ const Nav = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/news">News</NavLink>
+            <NavLink to="/user">user</NavLink>
           </li>
           <li>
-            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/project">project</NavLink>
           </li>
           <li>
             <NavLink to="/about">About</NavLink>
