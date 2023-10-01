@@ -16,6 +16,7 @@ const Login = (props) => {
   });
   const handlerSubmit = async (event) => {
     event.preventDefault();
+    console.log(">>>>> this is button submit ");
     let response = await loginAccount(account, password);
     setCheckObejctInput({ account: true, password: true });
     if (account === "") {
@@ -39,11 +40,16 @@ const Login = (props) => {
   };
 
   useEffect(() => {
-    let session = sessionStorage.getItem("account");
-    if (session) {
-      history.push("/");
-    }
-  }, []);
+    const reloadFunc = () => {
+      let session = sessionStorage.getItem("account");
+      if (session) {
+        history.push("/");
+        window.location.reload();
+      }
+    };
+    reloadFunc();
+  });
+
   return (
     <div className="container d-flex justify-content-center">
       <div className="d-flex  justify-content-center gap-3 row col-12 col-md-5 m-5   ">

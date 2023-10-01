@@ -4,12 +4,15 @@ import { Route } from "react-router-dom";
 const PrivateRouter = (props) => {
   let history = useHistory();
   useEffect(() => {
-    let session = sessionStorage.getItem("account");
-    if (!session) {
-      history.push("/login");
-      window.location.reload();
-    }
-  }, []);
+    const redirectUrl = () => {
+      let session = sessionStorage.getItem("account");
+      if (!session) {
+        history.push("/login");
+        window.location.reload();
+      }
+    };
+    redirectUrl();
+  });
   return (
     <>
       <Route path={props.path} component={props.component} />

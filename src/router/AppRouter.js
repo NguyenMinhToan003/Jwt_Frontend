@@ -1,6 +1,7 @@
 import Login from "../component/Login/Login";
 import SignUp from "../component/Signup/signup";
-import { User, Project } from "../component/ManageUser/user";
+import User from "../component/ManageUser/user";
+import Project from "../component/Project/project";
 import { Switch, Route } from "react-router-dom";
 import PrivateRouter from "./PrivateRoute";
 const AppRouter = (props) => {

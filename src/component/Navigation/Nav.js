@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Nav.scss";
 import { NavLink, useLocation } from "react-router-dom";
 const Nav = () => {
   const [show, setShow] = useState(true);
   const location = useLocation();
   useEffect(() => {
-    console.log(">>>> check location: ", location);
-    if (location.pathname === "/login") {
-      setShow(false);
-    }
-  }, []);
+    const redirecUrl = () => {
+      if (location.pathname === "/login") {
+        setShow(false);
+      }
+    };
+    redirecUrl();
+  });
 
   return (
     show && (
