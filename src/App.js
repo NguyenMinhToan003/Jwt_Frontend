@@ -14,7 +14,6 @@ function App() {
         </header>
       </div>
       <AppRouter />
-
       <ToastContainer
         position="bottom-center"
         autoClose={5000}
