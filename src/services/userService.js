@@ -4,4 +4,11 @@ const dataUserService = async (page, limit) => {
     `http://localhost:4000/api/v1/user/read?page=${page}&limit=${limit}`
   );
 };
-export { dataUserService };
+const deleteUser = async (user) => {
+  return await axios.delete("http://localhost:4000/api/v1/user/delete", {
+    data: {
+      id: user.id,
+    },
+  });
+};
+export { dataUserService, deleteUser };

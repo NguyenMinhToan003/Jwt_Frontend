@@ -1,28 +1,53 @@
 import { useEffect, useState } from "react";
-import { dataUserService } from "../../services/userService";
+import { dataUserService, deleteUser } from "../../services/userService";
+import ModeDelete from "./modelDelete";
 import ReactPaginate from "react-paginate";
+import { toast } from "react-toastify";
 const User = (props) => {
   const [user, setUser] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setlimit] = useState(4);
   // const [totalRows, setTotalRows] = useState(0);
+  const [selectUser, setSelectUser] = useState({});
+
   const [totalPage, setTotalPage] = useState(0);
+  const [isShowModelDelete, setIsShowModelDelete] = useState(false);
   useEffect(() => {
     fetchData();
-  }, [page]);
+  }, [page, setUser]);
   const fetchData = async () => {
     let data = await dataUserService(page, limit);
-    console.log(data);
     setUser(data.data.DT.user);
     setTotalPage(data.data.DT.totalPage);
   };
   const handlePageClick = (event) => {
+    fetchData();
     setPage(event.selected + 1);
-    // console.log(">>>check ", event.selected);
   };
-  useEffect(() => {}, [ReactPaginate]);
+  const handlerDelete = (user) => {
+    setSelectUser(user);
+    setIsShowModelDelete(true);
+  };
+  const handerCloseModelDelete = () => {
+    setIsShowModelDelete(false);
+  };
+  const handlerConfimDelete = async () => {
+    setIsShowModelDelete(false);
+    console.log(">>>> check data select user: ", selectUser);
+    let response = await deleteUser(selectUser);
+    if (response && response.data.EC === 0) {
+      toast.success(response.data.EM);
+      await fetchData();
+    } else toast.error(response.data.EM);
+  };
   return (
     <>
+      <ModeDelete
+        show={isShowModelDelete}
+        close={handerCloseModelDelete}
+        comfimDelete={handlerConfimDelete}
+        user={selectUser}
+      />
       <div className="container">
         <h3 className="text-center mt-3 mb-4 fw-bold">Account Table</h3>
         <div className="d-flex gap-2 justify-content-end">
@@ -51,7 +76,13 @@ const User = (props) => {
                   <td>{item.address}</td>
                   <td className="action d-flex gap-2">
                     <button className="btn btn-warning">Edit</button>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => {
+                        handlerDelete(item);
+                      }}>
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))
