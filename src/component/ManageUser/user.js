@@ -3,6 +3,7 @@ import { dataUserService, deleteUser } from "../../services/userService";
 import ModeDelete from "./modelDelete";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
+import ModelCreate from "./modelCreate";
 const User = (props) => {
   const [user, setUser] = useState([]);
   const [page, setPage] = useState(1);
@@ -12,6 +13,7 @@ const User = (props) => {
 
   const [totalPage, setTotalPage] = useState(0);
   const [isShowModelDelete, setIsShowModelDelete] = useState(false);
+  const [isShowModelCreate, setIsShowModelCreate] = useState(false);
   useEffect(() => {
     fetchData();
   }, [page, setUser]);
@@ -31,6 +33,9 @@ const User = (props) => {
   const handerCloseModelDelete = () => {
     setIsShowModelDelete(false);
   };
+  const handerCloseModelCreate = () => {
+    setIsShowModelCreate(false);
+  };
   const handlerConfimDelete = async () => {
     setIsShowModelDelete(false);
     console.log(">>>> check data select user: ", selectUser);
@@ -40,8 +45,15 @@ const User = (props) => {
       await fetchData();
     } else toast.error(response.data.EM);
   };
+  const handlerShowModelCreate = async () => {
+    setIsShowModelCreate(true);
+  };
+  const handlerRefreshPage = () => {
+    window.location.reload();
+  };
   return (
     <>
+      <ModelCreate show={isShowModelCreate} close={handerCloseModelCreate} />
       <ModeDelete
         show={isShowModelDelete}
         close={handerCloseModelDelete}
@@ -51,8 +63,20 @@ const User = (props) => {
       <div className="container">
         <h3 className="text-center mt-3 mb-4 fw-bold">Account Table</h3>
         <div className="d-flex gap-2 justify-content-end">
-          <button className="btn btn-success">Refresh</button>
-          <button className="btn btn-primary">Create Account</button>
+          <button
+            className="btn btn-success"
+            onClick={() => {
+              handlerRefreshPage();
+            }}>
+            Refresh
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              handlerShowModelCreate();
+            }}>
+            Create Account
+          </button>
         </div>
         <table className="table table-striped table-hover">
           <thead>

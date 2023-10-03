@@ -11,4 +11,23 @@ const deleteUser = async (user) => {
     },
   });
 };
-export { dataUserService, deleteUser };
+const createUser = async (
+  email,
+  name,
+  password,
+  address,
+  phone,
+  major,
+  gender
+) => {
+  return await axios.post("http://localhost:4000/api/v1/user/create", {
+    email,
+    name,
+    password,
+    address,
+    phone,
+    major,
+    gender,
+  });
+};
+export { dataUserService, deleteUser, createUser };

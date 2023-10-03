@@ -85,7 +85,7 @@ const SignUp = () => {
       } else toast.error(dataServer.EM);
     }
   };
-  useEffect(() => {}, []);
+
   return (
     <div className="signup-container py-5">
       <div className="container d-flex ">
