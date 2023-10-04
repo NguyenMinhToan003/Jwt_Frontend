@@ -1,18 +1,17 @@
-// import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
-import "../Signup/signup.scss";
 import { toast } from "react-toastify";
-import { createUser } from "../../services/userService";
-
-const ModelCreate = (props) => {
-  const [email, setEmail] = useState("");
+import "./user.scss";
+import { updateUser, createUser } from "../../services/userService";
+const ModelEdit = (props) => {
+  const [email, setEmail] = useState(props.user.email);
   const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
-  const [major, setMajor] = useState("");
-  const [gender, setGender] = useState("");
-  const [name, setName] = useState("");
-  const [repass, setRepass] = useState("");
+  const [address, setAddress] = useState(props.user.address);
+  const [phone, setPhone] = useState(props.user.phone);
+  const [major, setMajor] = useState(props.user.major);
+  const [gender, setGender] = useState(props.user.gender);
+  const [name, setName] = useState(props.user.name);
+  const [repass, setRepass] = useState(props.user.repass);
+  const [id, setId] = useState(props.user.id);
   const [objectCheckInput, setObjectCheckInput] = useState({
     email: true,
     password: true,
@@ -20,6 +19,15 @@ const ModelCreate = (props) => {
     repass: true,
     phone: true,
   });
+  useEffect(() => {
+    setEmail(props.user.email);
+    setAddress(props.user.address);
+    setPhone(props.user.phone);
+    setMajor(props.user.major);
+    setGender(props.user.gender);
+    setName(props.user.name);
+    setId(props.user.id);
+  }, [props.user]);
 
   const handlerCheckInputs = () => {
     setObjectCheckInput({
@@ -62,12 +70,13 @@ const ModelCreate = (props) => {
     }
     return true;
   };
+
   const handlerSubmit = async (event) => {
     event.preventDefault();
     let check = handlerCheckInputs();
     if (check) {
-      // toast.success("Nice create account");
-      let statusCreate = await createUser(
+      let update = await updateUser(
+        id,
         email,
         name,
         password,
@@ -76,20 +85,22 @@ const ModelCreate = (props) => {
         major,
         gender
       );
-      let dataServer = statusCreate.data;
-      if (+dataServer.EC === 0) {
-        toast.success(dataServer.EM);
+      if (update.data.EC === 0) {
+        toast.success(update.data.EM);
         props.close();
-      } else toast.error(dataServer.EM);
+      } else toast.error(update.data.EM);
     }
   };
   const handlerOnClose = (event) => {
     event.preventDefault();
     props.close();
   };
+  //   const handleEmailChange = (event) => {
+  //     setEmail(event.target.value);
+  //   };
   return (
     <>
-      {props.show && (
+      {props.show ? (
         <div className="modelCreateAccount position-fixed top-0 start-0 bottom-0 end-0">
           <div className="position-fixed top-50 start-50 translate-middle">
             <div className="container d-flex align-item-center justify-content-center ">
@@ -105,6 +116,7 @@ const ModelCreate = (props) => {
                 </span>
                 <h3 className="fw-bold text-center fs-1 brand">Facebook</h3>
                 <input
+                  value={email}
                   type="email"
                   placeholder="Email address"
                   className={
@@ -117,6 +129,7 @@ const ModelCreate = (props) => {
                   }}
                 />
                 <input
+                  value={name}
                   type="text"
                   placeholder="Name"
                   className=" form-control  border border-1 px-3 py-3"
@@ -147,6 +160,7 @@ const ModelCreate = (props) => {
                   onChange={(event) => setRepass(event.target.value)}
                 />
                 <input
+                  value={address}
                   type="text"
                   placeholder="Address"
                   className=" form-control  border border-1 px-3 py-3"
@@ -155,6 +169,7 @@ const ModelCreate = (props) => {
                   }}
                 />
                 <input
+                  value={phone}
                   type="tel"
                   placeholder="Phone"
                   className={
@@ -201,14 +216,16 @@ const ModelCreate = (props) => {
                   type="submit"
                   className="btn btn-primary px-3 py-3 fw-bold"
                   onClick={(event) => handlerSubmit(event)}>
-                  Create Account
+                  Edit Account
                 </button>
               </form>
             </div>
           </div>
         </div>
+      ) : (
+        ""
       )}
     </>
   );
 };
-export default ModelCreate;
+export default ModelEdit;

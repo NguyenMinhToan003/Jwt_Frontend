@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import { dataUserService, deleteUser } from "../../services/userService";
-import ModeDelete from "./modelDelete";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
+import ModeDelete from "./modelDelete";
 import ModelCreate from "./modelCreate";
+import ModelEdit from "./modelEdit";
 const User = (props) => {
   const [user, setUser] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit, setlimit] = useState(4);
-  // const [totalRows, setTotalRows] = useState(0);
+  const [limit, setlimit] = useState(7);
+  const [totalRows, setTotalRows] = useState(0);
   const [selectUser, setSelectUser] = useState({});
-
   const [totalPage, setTotalPage] = useState(0);
   const [isShowModelDelete, setIsShowModelDelete] = useState(false);
   const [isShowModelCreate, setIsShowModelCreate] = useState(false);
+  const [isShowModelEdit, setIsShowModeEdit] = useState(false);
   useEffect(() => {
     fetchData();
   }, [page, setUser]);
@@ -26,7 +27,7 @@ const User = (props) => {
     fetchData();
     setPage(event.selected + 1);
   };
-  const handlerDelete = (user) => {
+  const handlerShowModelDelete = (user) => {
     setSelectUser(user);
     setIsShowModelDelete(true);
   };
@@ -36,23 +37,36 @@ const User = (props) => {
   const handerCloseModelCreate = () => {
     setIsShowModelCreate(false);
   };
+  const handlerCloseModelEdit = () => {
+    setIsShowModeEdit(false);
+  };
   const handlerConfimDelete = async () => {
     setIsShowModelDelete(false);
-    console.log(">>>> check data select user: ", selectUser);
     let response = await deleteUser(selectUser);
     if (response && response.data.EC === 0) {
       toast.success(response.data.EM);
       await fetchData();
     } else toast.error(response.data.EM);
   };
-  const handlerShowModelCreate = async () => {
+  const handlerShowModelCreate = () => {
     setIsShowModelCreate(true);
   };
+  const handlerShowModelEdit = (user) => {
+    setSelectUser(user);
+    setIsShowModeEdit(true);
+  };
+
   const handlerRefreshPage = () => {
     window.location.reload();
   };
+
   return (
     <>
+      <ModelEdit
+        show={isShowModelEdit}
+        close={handlerCloseModelEdit}
+        user={selectUser}
+      />
       <ModelCreate show={isShowModelCreate} close={handerCloseModelCreate} />
       <ModeDelete
         show={isShowModelDelete}
@@ -99,11 +113,17 @@ const User = (props) => {
                   <td>{item.email}</td>
                   <td>{item.address}</td>
                   <td className="action d-flex gap-2">
-                    <button className="btn btn-warning">Edit</button>
+                    <button
+                      className="btn btn-warning"
+                      onClick={() => {
+                        handlerShowModelEdit(item);
+                      }}>
+                      Edit
+                    </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => {
-                        handlerDelete(item);
+                        handlerShowModelDelete(item);
                       }}>
                       Delete
                     </button>

@@ -11,6 +11,27 @@ const deleteUser = async (user) => {
     },
   });
 };
+const updateUser = async (
+  id,
+  email,
+  name,
+  password,
+  address,
+  phone,
+  major,
+  gender
+) => {
+  return await axios.put("http://localhost:4000/api/v1/user/update", {
+    id,
+    email,
+    name,
+    password,
+    address,
+    phone,
+    major,
+    gender,
+  });
+};
 const createUser = async (
   email,
   name,
@@ -30,4 +51,4 @@ const createUser = async (
     gender,
   });
 };
-export { dataUserService, deleteUser, createUser };
+export { dataUserService, deleteUser, createUser, updateUser };
