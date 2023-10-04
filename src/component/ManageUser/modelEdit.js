@@ -68,26 +68,31 @@ const ModelEdit = (props) => {
     if (!email) {
       setObjectCheckInput({ ...objectCheckInput, email: false });
       toast.error("no email");
+      emailRef.current.focus();
       return false;
     }
     if (!password) {
       setObjectCheckInput({ ...objectCheckInput, password: false });
       toast.error("no password");
+      passwordRef.current.focus();
       return false;
     }
     if (repass !== password) {
       setObjectCheckInput({ ...objectCheckInput, repass: false });
       toast.error("no same password");
+      rePasswordRef.current.focus();
       return false;
     }
-    if (!major) {
+    if (!+major) {
       setObjectCheckInput({ ...objectCheckInput, major: false });
       toast.error("no major");
+      majorRef.current.focus();
       return false;
     }
-    if (!phone) {
+    if (!+phone) {
       setObjectCheckInput({ ...objectCheckInput, phone: false });
       toast.error("no phone number");
+      phoneRef.current.focus();
       return false;
     }
 
@@ -171,7 +176,6 @@ const ModelEdit = (props) => {
                   }}
                 />
                 <input
-                  value={password}
                   type="password"
                   placeholder="Password"
                   onKeyDown={(event) => {
@@ -188,7 +192,6 @@ const ModelEdit = (props) => {
                   }}
                 />
                 <input
-                  value={password}
                   type="password"
                   onKeyDown={(event) => {
                     handlerKeyDown(event);
