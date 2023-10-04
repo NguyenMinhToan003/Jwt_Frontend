@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import "./user.scss";
-import { updateUser, createUser } from "../../services/userService";
+import { updateUser } from "../../services/userService";
 const ModelEdit = (props) => {
-  const [email, setEmail] = useState(props.user.email);
+  console.log(props.user);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [address, setAddress] = useState(props.user.address);
-  const [phone, setPhone] = useState(props.user.phone);
-  const [major, setMajor] = useState(props.user.major);
-  const [gender, setGender] = useState(props.user.gender);
-  const [name, setName] = useState(props.user.name);
-  const [repass, setRepass] = useState(props.user.repass);
-  const [id, setId] = useState(props.user.id);
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [major, setMajor] = useState("");
+  const [gender, setGender] = useState("");
+  const [name, setName] = useState("");
+  const [repass, setRepass] = useState("");
+  const [id, setId] = useState("");
   const [objectCheckInput, setObjectCheckInput] = useState({
     email: true,
     password: true,
@@ -23,11 +24,39 @@ const ModelEdit = (props) => {
     setEmail(props.user.email);
     setAddress(props.user.address);
     setPhone(props.user.phone);
-    setMajor(props.user.major);
+    setMajor(props.user.groupId);
     setGender(props.user.gender);
     setName(props.user.name);
     setId(props.user.id);
   }, [props.user]);
+
+  // use referent
+  const emailRef = useRef(null);
+  const nameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const rePasswordRef = useRef(null);
+  const addressRef = useRef(null);
+  const phoneRef = useRef(null);
+  const genderRef = useRef(null);
+  const majorRef = useRef(null);
+
+  const handlerKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (event.target === emailRef.current) nameRef.current.focus();
+      else if (event.target === nameRef.current) passwordRef.current.focus();
+      else if (event.target === passwordRef.current)
+        rePasswordRef.current.focus();
+      else if (event.target === rePasswordRef.current)
+        addressRef.current.focus();
+      else if (event.target === addressRef.current) phoneRef.current.focus();
+      else if (event.target === phoneRef.current) genderRef.current.focus();
+      else if (event.target === genderRef.current) majorRef.current.focus();
+      else if (event.target === majorRef.current) handlerSubmit(event);
+    }
+  };
+
+  // handler data
 
   const handlerCheckInputs = () => {
     setObjectCheckInput({
@@ -95,9 +124,9 @@ const ModelEdit = (props) => {
     event.preventDefault();
     props.close();
   };
-  //   const handleEmailChange = (event) => {
-  //     setEmail(event.target.value);
-  //   };
+  // const handleEmailChange = (event) => {
+  //   setEmail(event.target.value);
+  // };
   return (
     <>
       {props.show ? (
@@ -105,20 +134,20 @@ const ModelEdit = (props) => {
           <div className="position-fixed top-50 start-50 translate-middle">
             <div className="container d-flex align-item-center justify-content-center ">
               <form className=" d-flex row col-12 gap-3 form-signup p-5 border border-1 rounded-3">
-                <span className="d-flex justify-content-end">
+                <div className="d-flex align-item-center justify-content-end">
                   <button
-                    className="btn btn-danger fw-bold"
-                    onClick={(event) => {
-                      handlerOnClose(event);
-                    }}>
+                    className="btn btn-danger"
+                    onClick={(event) => handlerOnClose(event)}>
                     Close
                   </button>
-                </span>
+                </div>
                 <h3 className="fw-bold text-center fs-1 brand">Facebook</h3>
                 <input
                   value={email}
                   type="email"
                   placeholder="Email address"
+                  ref={emailRef}
+                  onKeyDown={(event) => handlerKeyDown(event)}
                   className={
                     objectCheckInput.email
                       ? " form-control  border border-1 px-3 py-3 "
@@ -132,14 +161,23 @@ const ModelEdit = (props) => {
                   value={name}
                   type="text"
                   placeholder="Name"
+                  ref={nameRef}
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
                   className=" form-control  border border-1 px-3 py-3"
                   onChange={(event) => {
                     setName(event.target.value);
                   }}
                 />
                 <input
+                  value={password}
                   type="password"
                   placeholder="Password"
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
+                  ref={passwordRef}
                   className={
                     objectCheckInput.password
                       ? " form-control  border border-1 px-3 py-3 "
@@ -150,7 +188,12 @@ const ModelEdit = (props) => {
                   }}
                 />
                 <input
+                  value={password}
                   type="password"
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
+                  ref={rePasswordRef}
                   placeholder="Re-Password"
                   className={
                     objectCheckInput.repass
@@ -161,6 +204,10 @@ const ModelEdit = (props) => {
                 />
                 <input
                   value={address}
+                  ref={addressRef}
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
                   type="text"
                   placeholder="Address"
                   className=" form-control  border border-1 px-3 py-3"
@@ -169,8 +216,12 @@ const ModelEdit = (props) => {
                   }}
                 />
                 <input
-                  value={phone}
                   type="tel"
+                  value={phone}
+                  ref={phoneRef}
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
                   placeholder="Phone"
                   className={
                     objectCheckInput.phone
@@ -182,7 +233,12 @@ const ModelEdit = (props) => {
                   }}
                 />
                 <select
+                  value={gender}
                   defaultValue={"DEFAULT"}
+                  ref={genderRef}
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
                   className="form-select border border-1 px-3 py-3 "
                   onChange={(event) => {
                     setGender(event.target.value);
@@ -196,6 +252,11 @@ const ModelEdit = (props) => {
 
                 <select
                   defaultValue={"DEFAULT"}
+                  value={major}
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
+                  ref={majorRef}
                   className={
                     objectCheckInput.major
                       ? " form-select  border border-1 px-3 py-3 "
@@ -216,7 +277,7 @@ const ModelEdit = (props) => {
                   type="submit"
                   className="btn btn-primary px-3 py-3 fw-bold"
                   onClick={(event) => handlerSubmit(event)}>
-                  Edit Account
+                  Comfim Edit
                 </button>
               </form>
             </div>

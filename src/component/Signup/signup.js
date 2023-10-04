@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../Signup/signup.scss";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -23,6 +23,33 @@ const SignUp = () => {
     phone: true,
   });
 
+  // use Referen
+  const emailRef = useRef(null);
+  const nameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const rePasswordRef = useRef(null);
+  const addressRef = useRef(null);
+  const phoneRef = useRef(null);
+  const genderRef = useRef(null);
+  const majorRef = useRef(null);
+
+  const handlerKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (event.target === emailRef.current) nameRef.current.focus();
+      else if (event.target === nameRef.current) passwordRef.current.focus();
+      else if (event.target === passwordRef.current)
+        rePasswordRef.current.focus();
+      else if (event.target === rePasswordRef.current)
+        addressRef.current.focus();
+      else if (event.target === addressRef.current) phoneRef.current.focus();
+      else if (event.target === phoneRef.current) genderRef.current.focus();
+      else if (event.target === genderRef.current) majorRef.current.focus();
+      else if (event.target === majorRef.current) handlerSubmit(event);
+    }
+  };
+
+  // handler data
   const handlerCheckInputs = () => {
     setObjectCheckInput({
       email: true,
@@ -33,26 +60,31 @@ const SignUp = () => {
     if (!email) {
       setObjectCheckInput({ ...objectCheckInput, email: false });
       toast.error("no email");
+      emailRef.current.focus();
       return false;
     }
     if (!password) {
       setObjectCheckInput({ ...objectCheckInput, password: false });
       toast.error("no password");
+      passwordRef.current.focus();
       return false;
     }
     if (repass !== password) {
       setObjectCheckInput({ ...objectCheckInput, repass: false });
       toast.error("no same password");
+      rePasswordRef.current.focus();
       return false;
     }
     if (!major) {
       setObjectCheckInput({ ...objectCheckInput, major: false });
       toast.error("no major");
+      majorRef.current.focus();
       return false;
     }
     if (!phone) {
       setObjectCheckInput({ ...objectCheckInput, phone: false });
       toast.error("no phone number");
+      phoneRef.current.focus();
       return false;
     }
 
@@ -60,6 +92,7 @@ const SignUp = () => {
       /^[A-Za-z0-9](([a-zA-Z0-9,=.!-#|$%^&*+/?_`{}~]+)*)@(?:[0-9a-zA-Z-]+.)+[a-zA-Z]{2,9}$/;
     if (!regex.test(email)) {
       toast.error("error form email");
+      emailRef.current.focus();
       return false;
     }
     return true;
@@ -110,6 +143,8 @@ const SignUp = () => {
           <input
             type="email"
             placeholder="Email address"
+            ref={emailRef}
+            onKeyDown={(event) => handlerKeyDown(event)}
             className={
               objectCheckInput.email
                 ? " form-control  border border-1 px-3 py-3 "
@@ -122,6 +157,10 @@ const SignUp = () => {
           <input
             type="text"
             placeholder="Name"
+            ref={nameRef}
+            onKeyDown={(event) => {
+              handlerKeyDown(event);
+            }}
             className=" form-control  border border-1 px-3 py-3"
             onChange={(event) => {
               setName(event.target.value);
@@ -130,6 +169,10 @@ const SignUp = () => {
           <input
             type="password"
             placeholder="Password"
+            onKeyDown={(event) => {
+              handlerKeyDown(event);
+            }}
+            ref={passwordRef}
             className={
               objectCheckInput.password
                 ? " form-control  border border-1 px-3 py-3 "
@@ -141,6 +184,10 @@ const SignUp = () => {
           />
           <input
             type="password"
+            onKeyDown={(event) => {
+              handlerKeyDown(event);
+            }}
+            ref={rePasswordRef}
             placeholder="Re-Password"
             className={
               objectCheckInput.repass
@@ -150,6 +197,10 @@ const SignUp = () => {
             onChange={(event) => setRepass(event.target.value)}
           />
           <input
+            ref={addressRef}
+            onKeyDown={(event) => {
+              handlerKeyDown(event);
+            }}
             type="text"
             placeholder="Address"
             className=" form-control  border border-1 px-3 py-3"
@@ -159,6 +210,10 @@ const SignUp = () => {
           />
           <input
             type="tel"
+            ref={phoneRef}
+            onKeyDown={(event) => {
+              handlerKeyDown(event);
+            }}
             placeholder="Phone"
             className={
               objectCheckInput.phone
@@ -171,6 +226,10 @@ const SignUp = () => {
           />
           <select
             defaultValue={"DEFAULT"}
+            ref={genderRef}
+            onKeyDown={(event) => {
+              handlerKeyDown(event);
+            }}
             className="form-select border border-1 px-3 py-3 "
             onChange={(event) => {
               setGender(event.target.value);
@@ -184,6 +243,10 @@ const SignUp = () => {
 
           <select
             defaultValue={"DEFAULT"}
+            onKeyDown={(event) => {
+              handlerKeyDown(event);
+            }}
+            ref={majorRef}
             className={
               objectCheckInput.major
                 ? " form-select  border border-1 px-3 py-3 "

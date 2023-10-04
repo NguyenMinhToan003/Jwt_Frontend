@@ -1,5 +1,5 @@
 // import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../Signup/signup.scss";
 import { toast } from "react-toastify";
 import { createUser } from "../../services/userService";
@@ -20,6 +20,34 @@ const ModelCreate = (props) => {
     repass: true,
     phone: true,
   });
+
+  // use referent
+  const emailRef = useRef(null);
+  const nameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const rePasswordRef = useRef(null);
+  const addressRef = useRef(null);
+  const phoneRef = useRef(null);
+  const genderRef = useRef(null);
+  const majorRef = useRef(null);
+
+  const handlerKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (event.target === emailRef.current) nameRef.current.focus();
+      else if (event.target === nameRef.current) passwordRef.current.focus();
+      else if (event.target === passwordRef.current)
+        rePasswordRef.current.focus();
+      else if (event.target === rePasswordRef.current)
+        addressRef.current.focus();
+      else if (event.target === addressRef.current) phoneRef.current.focus();
+      else if (event.target === phoneRef.current) genderRef.current.focus();
+      else if (event.target === genderRef.current) majorRef.current.focus();
+      else if (event.target === majorRef.current) handlerSubmit(event);
+    }
+  };
+
+  // handler data
 
   const handlerCheckInputs = () => {
     setObjectCheckInput({
@@ -94,19 +122,21 @@ const ModelCreate = (props) => {
           <div className="position-fixed top-50 start-50 translate-middle">
             <div className="container d-flex align-item-center justify-content-center ">
               <form className=" d-flex row col-12 gap-3 form-signup p-5 border border-1 rounded-3">
-                <span className="d-flex justify-content-end">
+                <div className="d-flex align-item-center justify-content-end">
                   <button
-                    className="btn btn-danger fw-bold"
+                    className="btn btn-danger"
                     onClick={(event) => {
                       handlerOnClose(event);
                     }}>
                     Close
                   </button>
-                </span>
+                </div>
                 <h3 className="fw-bold text-center fs-1 brand">Facebook</h3>
                 <input
                   type="email"
                   placeholder="Email address"
+                  ref={emailRef}
+                  onKeyDown={(event) => handlerKeyDown(event)}
                   className={
                     objectCheckInput.email
                       ? " form-control  border border-1 px-3 py-3 "
@@ -119,6 +149,10 @@ const ModelCreate = (props) => {
                 <input
                   type="text"
                   placeholder="Name"
+                  ref={nameRef}
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
                   className=" form-control  border border-1 px-3 py-3"
                   onChange={(event) => {
                     setName(event.target.value);
@@ -127,6 +161,10 @@ const ModelCreate = (props) => {
                 <input
                   type="password"
                   placeholder="Password"
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
+                  ref={passwordRef}
                   className={
                     objectCheckInput.password
                       ? " form-control  border border-1 px-3 py-3 "
@@ -138,6 +176,10 @@ const ModelCreate = (props) => {
                 />
                 <input
                   type="password"
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
+                  ref={rePasswordRef}
                   placeholder="Re-Password"
                   className={
                     objectCheckInput.repass
@@ -147,6 +189,10 @@ const ModelCreate = (props) => {
                   onChange={(event) => setRepass(event.target.value)}
                 />
                 <input
+                  ref={addressRef}
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
                   type="text"
                   placeholder="Address"
                   className=" form-control  border border-1 px-3 py-3"
@@ -156,6 +202,10 @@ const ModelCreate = (props) => {
                 />
                 <input
                   type="tel"
+                  ref={phoneRef}
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
                   placeholder="Phone"
                   className={
                     objectCheckInput.phone
@@ -168,6 +218,10 @@ const ModelCreate = (props) => {
                 />
                 <select
                   defaultValue={"DEFAULT"}
+                  ref={genderRef}
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
                   className="form-select border border-1 px-3 py-3 "
                   onChange={(event) => {
                     setGender(event.target.value);
@@ -181,6 +235,10 @@ const ModelCreate = (props) => {
 
                 <select
                   defaultValue={"DEFAULT"}
+                  onKeyDown={(event) => {
+                    handlerKeyDown(event);
+                  }}
+                  ref={majorRef}
                   className={
                     objectCheckInput.major
                       ? " form-select  border border-1 px-3 py-3 "
@@ -201,7 +259,7 @@ const ModelCreate = (props) => {
                   type="submit"
                   className="btn btn-primary px-3 py-3 fw-bold"
                   onClick={(event) => handlerSubmit(event)}>
-                  Create Account
+                  Create New Account
                 </button>
               </form>
             </div>
