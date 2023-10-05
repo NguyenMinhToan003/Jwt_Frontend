@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { dataUserService, deleteUser } from "../../services/userService";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
-import ModeDelete from "./modelDelete";
+import ModeAlert from "./modelAlert";
 import ModelCreate from "./modelCreate";
 import ModelEdit from "./modelEdit";
+// import Test from "./test";
+
 const User = (props) => {
   const [user, setUser] = useState([]);
   const [page, setPage] = useState(1);
@@ -12,9 +14,13 @@ const User = (props) => {
   const [totalRows, setTotalRows] = useState(0);
   const [selectUser, setSelectUser] = useState({});
   const [totalPage, setTotalPage] = useState(0);
-  const [isShowModelDelete, setIsShowModelDelete] = useState(false);
+  const [isShowModelAlert, setIsShowModelAlert] = useState(false);
   const [isShowModelCreate, setIsShowModelCreate] = useState(false);
   const [isShowModelEdit, setIsShowModeEdit] = useState(false);
+  const [useAlert, setUseAlert] = useState(`DELETE`);
+  const count = () => {
+    return (page - 1) * limit;
+  };
   useEffect(() => {
     fetchData();
   }, [page, setUser]);
@@ -29,10 +35,10 @@ const User = (props) => {
   };
   const handlerShowModelDelete = (user) => {
     setSelectUser(user);
-    setIsShowModelDelete(true);
+    setIsShowModelAlert(true);
   };
   const handerCloseModelDelete = () => {
-    setIsShowModelDelete(false);
+    setIsShowModelAlert(false);
   };
   const handerCloseModelCreate = () => {
     setIsShowModelCreate(false);
@@ -41,7 +47,7 @@ const User = (props) => {
     setIsShowModeEdit(false);
   };
   const handlerConfimDelete = async () => {
-    setIsShowModelDelete(false);
+    setIsShowModelAlert(false);
     let response = await deleteUser(selectUser);
     if (response && response.data.EC === 0) {
       toast.success(response.data.EM);
@@ -68,8 +74,9 @@ const User = (props) => {
         user={selectUser}
       />
       <ModelCreate show={isShowModelCreate} close={handerCloseModelCreate} />
-      <ModeDelete
-        show={isShowModelDelete}
+      <ModeAlert
+        use={useAlert}
+        show={isShowModelAlert}
         close={handerCloseModelDelete}
         comfimDelete={handlerConfimDelete}
         user={selectUser}
@@ -107,7 +114,7 @@ const User = (props) => {
             {user && user.length > 0 ? (
               user.map((item, index) => (
                 <tr key={index}>
-                  <th scope="row">{index + 1}</th>
+                  <th scope="row">{count() + index + 1}</th>
                   <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.email}</td>
