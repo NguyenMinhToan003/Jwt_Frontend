@@ -26,8 +26,8 @@ const User = (props) => {
   }, [page, setUser]);
   const fetchData = async () => {
     let data = await dataUserService(page, limit);
-    setUser(data.data.DT.user);
-    setTotalPage(data.data.DT.totalPage);
+    setUser(data.DT.user);
+    setTotalPage(data.DT.totalPage);
   };
   const handlePageClick = (event) => {
     fetchData();
@@ -49,10 +49,10 @@ const User = (props) => {
   const handlerConfimDelete = async () => {
     setIsShowModelAlert(false);
     let response = await deleteUser(selectUser);
-    if (response && response.data.EC === 0) {
-      toast.success(response.data.EM);
+    if (response && response.EC === 0) {
+      toast.success(response.EM);
       await fetchData();
-    } else toast.error(response.data.EM);
+    } else toast.error(response.EM);
   };
   const handlerShowModelCreate = () => {
     setIsShowModelCreate(true);

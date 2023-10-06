@@ -20,6 +20,7 @@ const Login = (props) => {
     // handlerSentData();
     console.log("action submit");
     let response = await loginAccount(account, password);
+    console.log(">>>> check response : ", response);
     setCheckObejctInput({ account: true, password: true });
     if (account === "") {
       setCheckObejctInput({ ...checkObjectInput, account: false });
@@ -28,16 +29,16 @@ const Login = (props) => {
       setCheckObejctInput({ ...checkObjectInput, password: false });
       toast.error("pleass ender your password");
     } else {
-      if (response && response.data && +response.data.EC === 0) {
+      if (response && +response.EC === 0) {
         let data = {
           author: true,
           token: "fake token",
         };
         sessionStorage.setItem("account", JSON.stringify(data));
-        toast.info(response.data.EM);
+        toast.info(response.EM);
         history.push("/user");
         window.location.reload();
-      } else toast.error(response.data.EM);
+      } else toast.error(response.EM);
     }
   };
 

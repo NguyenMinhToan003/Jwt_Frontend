@@ -115,7 +115,7 @@ const ModelCreate = (props) => {
         major,
         gender
       );
-      let dataServer = statusCreate.data;
+      let dataServer = statusCreate;
       if (+dataServer.EC === 0) {
         toast.success(dataServer.EM);
         props.close();

@@ -103,10 +103,10 @@ const ModelEdit = (props) => {
         major,
         gender
       );
-      if (update.data.EC === 0) {
-        toast.success(update.data.EM);
+      if (update.EC === 0) {
+        toast.success(update.EM);
         props.close();
-      } else toast.error(update.data.EM);
+      } else toast.error(update.EM);
     }
   };
 
@@ -135,9 +135,6 @@ const ModelEdit = (props) => {
                     ? " form-control  border border-1 px-3 py-3 "
                     : " form-control   px-3 py-3 is-invalid"
                 }
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
               />
               <input
                 value={name}
@@ -208,9 +205,6 @@ const ModelEdit = (props) => {
                     ? " form-control  border border-1 px-3 py-3 "
                     : " form-control   px-3 py-3 is-invalid"
                 }
-                onChange={(event) => {
-                  setPhone(event.target.value);
-                }}
               />
               <select
                 defaultValue={"DEFAULT"}
