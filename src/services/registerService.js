@@ -5,7 +5,7 @@ const registerCreateUser = async (
   password,
   address,
   phone,
-  major,
+  groupId,
   gender
 ) => {
   return await axios.post("http://localhost:4000/api/v1/signup", {
@@ -14,7 +14,7 @@ const registerCreateUser = async (
     password,
     address,
     phone,
-    major,
+    groupId,
     gender,
   });
 };

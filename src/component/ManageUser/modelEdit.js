@@ -3,30 +3,22 @@ import { toast } from "react-toastify";
 import "./user.scss";
 import { updateUser } from "../../services/userService";
 import Modal from "react-bootstrap/Modal";
+import { add } from "lodash";
 const ModelEdit = (props) => {
-  console.log(props.user);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
-  const [major, setMajor] = useState("");
+  const [address, setAddress] = useState("");
   const [gender, setGender] = useState("");
   const [name, setName] = useState("");
-  const [repass, setRepass] = useState("");
   const [id, setId] = useState("");
   const [groupId, setGroupId] = useState("");
   const [objectCheckInput, setObjectCheckInput] = useState({
-    email: true,
-    password: true,
-    major: true,
-    repass: true,
-    phone: true,
+    groupId: true,
   });
   useEffect(() => {
     setEmail(props.user.email);
-    setAddress(props.user.address);
     setPhone(props.user.phone);
-    setMajor(props.user.groupId);
+    setAddress(props.user.address);
     setGender(props.user.gender);
     setName(props.user.name);
     setId(props.user.id);
@@ -34,28 +26,19 @@ const ModelEdit = (props) => {
   }, [props.user]);
 
   // use referent
-  const emailRef = useRef(null);
+
   const nameRef = useRef(null);
-  const passwordRef = useRef(null);
-  const rePasswordRef = useRef(null);
   const addressRef = useRef(null);
-  const phoneRef = useRef(null);
   const genderRef = useRef(null);
-  const majorRef = useRef(null);
+  const groupIdRef = useRef(null);
 
   const handlerKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      if (event.target === emailRef.current) nameRef.current.focus();
-      else if (event.target === nameRef.current) passwordRef.current.focus();
-      else if (event.target === passwordRef.current)
-        rePasswordRef.current.focus();
-      else if (event.target === rePasswordRef.current)
-        addressRef.current.focus();
-      else if (event.target === addressRef.current) phoneRef.current.focus();
-      else if (event.target === phoneRef.current) genderRef.current.focus();
-      else if (event.target === genderRef.current) majorRef.current.focus();
-      else if (event.target === majorRef.current) handlerSubmit(event);
+      if (event.target === nameRef.current) addressRef.current.focus();
+      else if (event.target === addressRef.current) genderRef.current.focus();
+      else if (event.target === genderRef.current) groupIdRef.current.focus();
+      else if (event.target === groupIdRef.current) handlerSubmit(event);
     }
   };
 
@@ -65,25 +48,14 @@ const ModelEdit = (props) => {
     setObjectCheckInput({
       email: true,
       password: true,
-      major: true,
+      groupId: true,
       repass: true,
     });
-    if (!password) {
-      setObjectCheckInput({ ...objectCheckInput, password: false });
-      toast.error("no password");
-      passwordRef.current.focus();
-      return false;
-    }
-    if (repass !== password) {
-      setObjectCheckInput({ ...objectCheckInput, repass: false });
-      toast.error("no same password");
-      rePasswordRef.current.focus();
-      return false;
-    }
-    if (!+major) {
-      setObjectCheckInput({ ...objectCheckInput, major: false });
-      toast.error("no major");
-      majorRef.current.focus();
+
+    if (!+groupId) {
+      setObjectCheckInput({ ...objectCheckInput, groupId: false });
+      toast.error("no groupId");
+      groupIdRef.current.focus();
       return false;
     }
     return true;
@@ -93,16 +65,7 @@ const ModelEdit = (props) => {
     event.preventDefault();
     let check = handlerCheckInputs();
     if (check) {
-      let update = await updateUser(
-        id,
-        email,
-        name,
-        password,
-        address,
-        phone,
-        major,
-        gender
-      );
+      let update = await updateUser(id, name, address, groupId, gender);
       if (update.EC === 0) {
         toast.success(update.EM);
         props.close();
@@ -128,7 +91,6 @@ const ModelEdit = (props) => {
                 value={email}
                 type="email"
                 placeholder="Email address"
-                ref={emailRef}
                 onKeyDown={(event) => handlerKeyDown(event)}
                 className={
                   objectCheckInput.email
@@ -150,36 +112,6 @@ const ModelEdit = (props) => {
                 }}
               />
               <input
-                type="password"
-                placeholder="Password"
-                onKeyDown={(event) => {
-                  handlerKeyDown(event);
-                }}
-                ref={passwordRef}
-                className={
-                  objectCheckInput.password
-                    ? " form-control  border border-1 px-3 py-3 "
-                    : " form-control   px-3 py-3 is-invalid"
-                }
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
-              />
-              <input
-                type="password"
-                onKeyDown={(event) => {
-                  handlerKeyDown(event);
-                }}
-                ref={rePasswordRef}
-                placeholder="Re-Password"
-                className={
-                  objectCheckInput.repass
-                    ? " form-control  border border-1 px-3 py-3 "
-                    : " form-control   px-3 py-3 is-invalid"
-                }
-                onChange={(event) => setRepass(event.target.value)}
-              />
-              <input
                 value={address}
                 ref={addressRef}
                 onKeyDown={(event) => {
@@ -195,7 +127,6 @@ const ModelEdit = (props) => {
               <input
                 value={phone}
                 type="tel"
-                ref={phoneRef}
                 onKeyDown={(event) => {
                   handlerKeyDown(event);
                 }}
@@ -229,18 +160,19 @@ const ModelEdit = (props) => {
                 onKeyDown={(event) => {
                   handlerKeyDown(event);
                 }}
-                ref={majorRef}
+                ref={groupIdRef}
                 className={
-                  objectCheckInput.major
+                  objectCheckInput.groupId
                     ? " form-select  border border-1 px-3 py-3 "
                     : " form-select   px-3 py-3 is-invalid"
                 }
                 onChange={(event) => {
-                  setMajor(event.target.value);
+                  setGroupId(event.target.value);
                 }}>
-                <option value={2}>Leader</option>
                 <option value={1}>Developer</option>
+                <option value={2}>Leader</option>
                 <option value={3}>Guess</option>
+                <option value={4}>Customer</option>
               </select>
 
               <button

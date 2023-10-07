@@ -11,24 +11,12 @@ const deleteUser = async (user) => {
     },
   });
 };
-const updateUser = async (
-  id,
-  email,
-  name,
-  password,
-  address,
-  phone,
-  major,
-  gender
-) => {
+const updateUser = async (id, name, address, groupId, gender) => {
   return await axios.put("/api/v1/user/update", {
     id,
-    email,
     name,
-    password,
     address,
-    phone,
-    major,
+    groupId,
     gender,
   });
 };
@@ -38,7 +26,7 @@ const createUser = async (
   password,
   address,
   phone,
-  major,
+  groupId,
   gender
 ) => {
   return await axios.post("/api/v1/user/create", {
@@ -47,7 +35,7 @@ const createUser = async (
     password,
     address,
     phone,
-    major,
+    groupId,
     gender,
   });
 };

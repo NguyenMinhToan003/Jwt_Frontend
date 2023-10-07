@@ -10,14 +10,14 @@ const ModelCreate = (props) => {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
-  const [major, setMajor] = useState("");
+  const [groupId, setGroupId] = useState(3);
   const [gender, setGender] = useState("");
   const [name, setName] = useState("");
   const [repass, setRepass] = useState("");
   const [objectCheckInput, setObjectCheckInput] = useState({
     email: true,
     password: true,
-    major: true,
+    groupId: true,
     repass: true,
     phone: true,
   });
@@ -30,7 +30,7 @@ const ModelCreate = (props) => {
   const addressRef = useRef(null);
   const phoneRef = useRef(null);
   const genderRef = useRef(null);
-  const majorRef = useRef(null);
+  const groupIdRef = useRef(null);
 
   const handlerKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -43,8 +43,8 @@ const ModelCreate = (props) => {
         addressRef.current.focus();
       else if (event.target === addressRef.current) phoneRef.current.focus();
       else if (event.target === phoneRef.current) genderRef.current.focus();
-      else if (event.target === genderRef.current) majorRef.current.focus();
-      else if (event.target === majorRef.current) handlerSubmit(event);
+      else if (event.target === genderRef.current) groupIdRef.current.focus();
+      else if (event.target === groupIdRef.current) handlerSubmit(event);
     }
   };
   // handler data
@@ -53,7 +53,7 @@ const ModelCreate = (props) => {
     setObjectCheckInput({
       email: true,
       password: true,
-      major: true,
+      groupId: true,
       repass: true,
     });
     if (!email) {
@@ -80,10 +80,10 @@ const ModelCreate = (props) => {
       addressRef.current.focus();
       return false;
     }
-    if (!major) {
-      setObjectCheckInput({ ...objectCheckInput, major: false });
-      toast.error("Major is Empty");
-      majorRef.current.focus();
+    if (!groupId) {
+      setObjectCheckInput({ ...objectCheckInput, groupId: false });
+      toast.error("groupId is Empty");
+      groupIdRef.current.focus();
       return false;
     }
     if (!phone) {
@@ -112,7 +112,7 @@ const ModelCreate = (props) => {
         password,
         address,
         phone,
-        major,
+        groupId,
         gender
       );
       let dataServer = statusCreate;
@@ -235,25 +235,28 @@ const ModelCreate = (props) => {
               </select>
 
               <select
-                defaultValue={"DEFAULT"}
+                // defaultValue={"DEFAULT"}
                 onKeyDown={(event) => {
                   handlerKeyDown(event);
                 }}
-                ref={majorRef}
+                ref={groupIdRef}
                 className={
-                  objectCheckInput.major
+                  objectCheckInput.groupId
                     ? " form-select  border border-1 px-3 py-3 "
                     : " form-select   px-3 py-3 is-invalid"
                 }
                 onChange={(event) => {
-                  setMajor(event.target.value);
+                  setGroupId(event.target.value);
                 }}>
-                <option selected value="DEFAULT" disabled>
-                  Choose major...
-                </option>
-                <option value={2}>Leader</option>
+                {/* <option selected value="DEFAULT" disabled>
+                  Choose groupId...
+                </option> */}
                 <option value={1}>Developer</option>
-                <option value={3}>Guess</option>
+                <option value={2}>Leader</option>
+                <option value={3} selected>
+                  Guess
+                </option>
+                <option value={4}>Customer</option>
               </select>
 
               <button
