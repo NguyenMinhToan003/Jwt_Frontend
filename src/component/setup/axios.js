@@ -1,6 +1,7 @@
 import axios from "axios";
 
 // Set config defaults when creating the instance
+
 const instance = axios.create({
   baseURL: "http://localhost:4000",
 });
@@ -8,6 +9,8 @@ const instance = axios.create({
 // Alter defaults after instance has been created
 // instance.defaults.headers.common["Authorization"] = AUTH_TOKEN;
 
+// set include cooke
+instance.defaults.withCredentials = true;
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
