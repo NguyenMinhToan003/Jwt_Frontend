@@ -254,7 +254,7 @@ const SignUp = () => {
             <option value={1}>Developer</option>
             <option value={4}>Customer</option>
             <option value={3} selected>
-              Guess
+              Guest
             </option>
           </select>
 

@@ -253,7 +253,7 @@ const Test = (props) => {
                   <option value={2}>Leader</option>
                   <option value={1}>Developer</option>
                   <option value={3} selected>
-                    Guess
+                    Guest
                   </option>
                 </select>
 
