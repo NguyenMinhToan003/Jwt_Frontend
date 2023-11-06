@@ -250,12 +250,12 @@ const SignUp = () => {
             onChange={(event) => {
               setGroupId(event.target.value);
             }}>
-            <option value={2}>Leader</option>
             <option value={1}>Developer</option>
-            <option value={4}>Customer</option>
+            <option value={2}>Leader</option>
             <option value={3} selected>
               Guest
             </option>
+            <option value={4}>Customer</option>
           </select>
 
           <button
