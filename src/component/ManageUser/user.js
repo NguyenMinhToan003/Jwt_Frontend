@@ -21,6 +21,7 @@ const User = (props) => {
   const count = () => {
     return (page - 1) * limit;
   };
+
   useEffect(() => {
     fetchData();
   }, [page, setUser]);
