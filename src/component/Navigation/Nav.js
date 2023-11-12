@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Nav.scss";
 import { NavLink, useLocation } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 const Nav = () => {
-  const [show, setShow] = useState(true);
+  const { dataUser } = useContext(UserContext);
   const location = useLocation();
-  useEffect(() => {
-    const redirecUrl = () => {
-      if (location.pathname === "/login") {
-        setShow(false);
-      }
-    };
-    redirecUrl();
-  });
-
-  return (
-    show && (
+  console.log(location.pathname);
+  if (
+    (dataUser && dataUser.isAutheticated === true) ||
+    location.pathname === "/"
+  )
+    return (
       <ul className="nav">
         <div className="option">
           <li>
@@ -38,7 +34,7 @@ const Nav = () => {
           </NavLink>
         </div>
       </ul>
-    )
-  );
+    );
+  else return <></>;
 };
 export default Nav;

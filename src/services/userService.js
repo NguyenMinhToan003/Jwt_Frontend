@@ -39,4 +39,7 @@ const createUser = async (
     gender,
   });
 };
-export { dataUserService, deleteUser, createUser, updateUser };
+const getAccount = async () => {
+  return axios.get("/api/v1/account");
+};
+export { dataUserService, deleteUser, createUser, updateUser, getAccount };

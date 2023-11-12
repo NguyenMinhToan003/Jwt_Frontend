@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { loginAccount } from "../../services/registerService";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { UserContext } from "../../context/UserContext";
+
 const Login = (props) => {
   const { loginContext } = useContext(UserContext);
   let history = useHistory();
@@ -18,7 +19,6 @@ const Login = (props) => {
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
-    // handlerSentData();
     let response = await loginAccount(account, password);
     setCheckObejctInput({ account: true, password: true });
     if (account === "") {
@@ -37,26 +37,13 @@ const Login = (props) => {
           token: response.DT.acess_token,
           acount: { email, name, groupWithRole },
         };
-        // console.log(data);
-        sessionStorage.setItem("account", JSON.stringify(data));
         loginContext(data);
         toast.info(response.EM);
         history.push("/user");
-        // window.location.reload();
       } else toast.error(response.EM);
     }
   };
 
-  useEffect(() => {
-    const reloadFunc = () => {
-      let session = sessionStorage.getItem("account");
-      if (session) {
-        // history.push("/");
-        // window.location.reload();
-      }
-    };
-    reloadFunc();
-  });
   const accountRef = useRef(null);
   const passwordRef = useRef(null);
   const handleKeyDown = async (event) => {
@@ -66,10 +53,7 @@ const Login = (props) => {
       else if (event.target === passwordRef.current) await handlerSubmit(event);
     }
   };
-  // const handlerSentData = () => {
-  //   setAccount(accountRef.current.value);
-  //   setPassword(passwordRef.current.value);
-  // };
+
   return (
     <div className="container d-flex justify-content-center">
       <div className="d-flex  justify-content-center gap-3 row col-12 col-md-5 m-5   ">
@@ -125,55 +109,3 @@ const Login = (props) => {
 };
 
 export default Login;
-
-// import React, { useRef } from "react";
-
-// const Login = () => {
-//   const emailRef = useRef(null);
-//   const passwordRef = useRef(null);
-
-//   const handleKeyDown = (e) => {
-//     if (e.key === "Enter") {
-//       e.preventDefault();
-
-//       if (e.target === emailRef.current) {
-//         passwordRef.current.focus();
-//       } else if (e.target === passwordRef.current) {
-//         // Perform login logic here
-//       }
-//     }
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     // Perform login logic here
-
-//     // Example: Accessing input values
-//     const email = emailRef.current.value;
-//     const password = passwordRef.current.value;
-
-//     // Example: Clearing input values
-//     emailRef.current.value = "";
-//     passwordRef.current.value = "";
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <label htmlFor="email">Email</label>
-//       <input type="email" id="email" ref={emailRef} onKeyDown={handleKeyDown} />
-
-//       <label htmlFor="password">Password</label>
-//       <input
-//         type="password"
-//         id="password"
-//         ref={passwordRef}
-//         onKeyDown={handleKeyDown}
-//       />
-
-//       <button type="submit">Login</button>
-//     </form>
-//   );
-// };
-
-// export default Login;
