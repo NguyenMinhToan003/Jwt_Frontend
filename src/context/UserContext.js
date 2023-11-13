@@ -4,12 +4,13 @@ const UserContext = React.createContext({ name: "Toan", auth: false });
 
 const UserProvider = ({ children }) => {
   const [dataUser, setUser] = useState({
+    isLoading: true,
     isAutheticated: false,
     token: "",
     acount: { email: "", name: "", groupWithRole: "" },
   });
   const loginContext = (userData) => {
-    setUser(userData);
+    setUser({ ...userData, isLoading: false });
   };
   const logoutContext = () => {
     setUser({ name: "", auth: false });
@@ -25,12 +26,15 @@ const UserProvider = ({ children }) => {
         token: response.DT.acess_token,
         acount: { email, name, groupWithRole },
       };
+
       setUser(data);
     }
   };
 
   useEffect(() => {
+    // if (window.location.pathname !== "/") {
     fetchUser();
+    // }
   }, []);
   return (
     <UserContext.Provider value={{ dataUser, loginContext, logoutContext }}>

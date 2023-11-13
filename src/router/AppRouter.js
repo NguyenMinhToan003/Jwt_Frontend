@@ -4,6 +4,7 @@ import User from "../component/ManageUser/user";
 import Project from "../component/Project/project";
 import { Switch, Route } from "react-router-dom";
 import PrivateRouter from "./PrivateRoute";
+
 const AppRouter = (props) => {
   return (
     <>
@@ -12,8 +13,8 @@ const AppRouter = (props) => {
           home
         </Route>
         <PrivateRouter path="/user" component={User} />
-        <Route path="/about">about</Route>
         <PrivateRouter path="/project" component={Project} />
+        <Route path="/about">about</Route>
         <Route path="/login">
           <Login />
         </Route>
