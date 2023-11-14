@@ -3,6 +3,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+.loading {
+  background-color: rgba(128, 128, 128, 0.265);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 // html {
 //   font-family: "IBM Plex Sans", sans-serif;
 //   font-family: "Roboto", sans-serif;

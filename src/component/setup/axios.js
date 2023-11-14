@@ -37,7 +37,7 @@ instance.interceptors.response.use(
     let arlet = "";
     switch (status) {
       case 401:
-        arlet = "UnAuthenticate";
+        return error.response.data;
       case 403:
         arlet = "Not Permission resource ";
     }
