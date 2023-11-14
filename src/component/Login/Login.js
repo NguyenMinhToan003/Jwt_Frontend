@@ -19,6 +19,7 @@ const Login = (props) => {
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
+
     let response = await loginAccount(account, password);
     setCheckObejctInput({ account: true, password: true });
     if (account === "") {
@@ -37,12 +38,14 @@ const Login = (props) => {
           token: response.DT.acess_token,
           acount: { email, name, groupWithRole },
         };
+
         loginContext(data);
         toast.info(response.EM);
         history.push("/user");
       } else toast.error(response.EM);
     }
   };
+
 
   const accountRef = useRef(null);
   const passwordRef = useRef(null);

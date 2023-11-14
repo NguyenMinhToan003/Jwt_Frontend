@@ -1,3 +1,4 @@
+
 import { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
@@ -12,6 +13,7 @@ const PrivateRouter = (props) => {
       </>
     );
   } else return <Redirect to="/login"></Redirect>;
+
 };
 
 export default PrivateRouter;
