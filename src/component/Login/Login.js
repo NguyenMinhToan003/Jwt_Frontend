@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Login.scss";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loginAccount } from "../../services/registerService";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
+import { UserContext } from "../../context/UserContext";
 const Login = (props) => {
+  const { loginContext } = useContext(UserContext);
   let history = useHistory();
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
@@ -18,9 +19,7 @@ const Login = (props) => {
   const handlerSubmit = async (event) => {
     event.preventDefault();
     // handlerSentData();
-    console.log("action submit");
     let response = await loginAccount(account, password);
-    console.log(">>>> check response : ", response);
     setCheckObejctInput({ account: true, password: true });
     if (account === "") {
       setCheckObejctInput({ ...checkObjectInput, account: false });
@@ -30,11 +29,17 @@ const Login = (props) => {
       toast.error("pleass ender your password");
     } else {
       if (response && +response.EC === 0) {
+        let email = response.DT.email;
+        let name = response.DT.name;
+        let groupWithRole = response.DT.groupWithRole.Roles;
         let data = {
-          author: true,
-          token: "fake token",
+          isAutheticated: true,
+          token: response.DT.acess_token,
+          acount: { email, name, groupWithRole },
         };
+        // console.log(data);
         sessionStorage.setItem("account", JSON.stringify(data));
+        loginContext(data);
         toast.info(response.EM);
         history.push("/user");
         // window.location.reload();
@@ -46,8 +51,8 @@ const Login = (props) => {
     const reloadFunc = () => {
       let session = sessionStorage.getItem("account");
       if (session) {
-        history.push("/");
-        window.location.reload();
+        // history.push("/");
+        // window.location.reload();
       }
     };
     reloadFunc();
