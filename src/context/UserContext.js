@@ -3,12 +3,13 @@ import { getAccount } from "../services/userService";
 const UserContext = React.createContext({ name: "Toan", auth: false });
 
 const UserProvider = ({ children }) => {
-  const [dataUser, setUser] = useState({
+  let userDefault = {
     isLoading: true,
     isAutheticated: false,
     token: "",
     acount: { email: "", name: "", groupWithRole: "" },
-  });
+  };
+  const [dataUser, setUser] = useState(userDefault);
   const loginContext = (userData) => {
     setUser({ ...userData, isLoading: false });
   };
@@ -25,16 +26,15 @@ const UserProvider = ({ children }) => {
         isAutheticated: true,
         token: response.DT.acess_token,
         acount: { email, name, groupWithRole },
+        isLoading: false,
       };
-
       setUser(data);
+    } else {
+      setUser({ ...userDefault, isLoading: false });
     }
   };
-
   useEffect(() => {
-    // if (window.location.pathname !== "/") {
     fetchUser();
-    // }
   }, []);
   return (
     <UserContext.Provider value={{ dataUser, loginContext, logoutContext }}>
