@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { getAccount } from "../services/userService";
 const UserContext = React.createContext({ name: "Toan", auth: false });
@@ -26,7 +25,7 @@ const UserProvider = ({ children }) => {
       let data = {
         isAutheticated: true,
         token: response.DT.acess_token,
-        acount: { email, name, groupWithRole },
+        account: { email, name, groupWithRole },
         isLoading: false,
       };
       setUser(data);

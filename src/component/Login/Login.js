@@ -33,19 +33,19 @@ const Login = (props) => {
         let email = response.DT.email;
         let name = response.DT.name;
         let groupWithRole = response.DT.groupWithRole.Roles;
+        let token = response.DT.acess_token;
         let data = {
           isAutheticated: true,
-          token: response.DT.acess_token,
-          acount: { email, name, groupWithRole },
+          token: token,
+          account: { email, name, groupWithRole },
         };
-
+        localStorage.setItem("jwt", token);
         loginContext(data);
         toast.info(response.EM);
         history.push("/user");
       } else toast.error(response.EM);
     }
   };
-
 
   const accountRef = useRef(null);
   const passwordRef = useRef(null);

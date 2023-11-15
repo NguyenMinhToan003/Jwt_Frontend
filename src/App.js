@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
-import Nav from "./component/Navigation/Nav";
+import NavHeader from "./component/Navigation/NavHeader";
 import { AppRouter } from "./router/AppRouter";
 import { ColorRing } from "react-loader-spinner";
 
@@ -31,7 +31,7 @@ function App() {
         <>
           <div className="App-container">
             <header className="App-header">
-              <Nav />
+              <NavHeader />
             </header>
           </div>
           <AppRouter />
