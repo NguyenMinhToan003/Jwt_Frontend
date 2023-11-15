@@ -14,7 +14,7 @@ const UserProvider = ({ children }) => {
     setUser({ ...userData, isLoading: false });
   };
   const logoutContext = () => {
-    setUser({ name: "", auth: false });
+    setUser({ ...userDefault, isLoading: false });
   };
   const fetchUser = async () => {
     let response = await getAccount();

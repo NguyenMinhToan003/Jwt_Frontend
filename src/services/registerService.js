@@ -25,5 +25,8 @@ const loginAccount = async (account, password) => {
     password,
   });
 };
+const logoutAccount = async () => {
+  return await axios.post("http://localhost:4000/api/v1/logout");
+};
 
-export { registerCreateUser, loginAccount };
+export { registerCreateUser, loginAccount, logoutAccount };
