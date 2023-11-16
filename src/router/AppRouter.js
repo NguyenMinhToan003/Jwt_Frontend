@@ -1,5 +1,6 @@
 import Login from "../component/Login/Login";
 import SignUp from "../component/Signup/signup";
+import Role from "../component/role/Role";
 import User from "../component/ManageUser/user";
 import Project from "../component/Project/project";
 import { Switch, Route } from "react-router-dom";
@@ -12,6 +13,7 @@ const AppRouter = (props) => {
         <Route path="/" exact>
           home
         </Route>
+        <PrivateRouter path="/role" component={Role} />
         <PrivateRouter path="/user" component={User} />
         <PrivateRouter path="/project" component={Project} />
         <Route path="/about">about</Route>
