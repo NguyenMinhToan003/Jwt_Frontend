@@ -1,15 +1,31 @@
-import { readRole } from "../../services/roleService";
+import ReactPaginate from "react-paginate";
+import { readRole } from "../../services/permissionService";
 import { useEffect, useState } from "react";
-
+import ModaEditRole from "./ModalEditRole";
+import ModalDeleteRole from "./ModelDeleteRole";
 const TableRole = (props) => {
-  const [role, setRole] = useState({});
+  let [limit, setLimit] = useState(5);
+  let [page, setPage] = useState(1);
+  let [totalPage, setTotalPage] = useState(0);
+  const [currentRole, setCurrentRole] = useState({});
   const fetchRole = async () => {
-    let role = await readRole();
-    setRole(role.DT);
+    let response = await readRole(page, limit);
+    if (response && response.EC == 0) {
+      let role = response.DT.role;
+      let totalPage = response.DT.totalPage;
+      setCurrentRole(role);
+      setTotalPage(totalPage);
+    }
   };
   useEffect(() => {
     fetchRole();
-  }, [role]);
+  }, [page, setCurrentRole]);
+
+  const handlePageClick = (event) => {
+    setPage(event.selected + 1);
+    fetchRole();
+    console.log(event.selected + 1);
+  };
   return (
     <>
       <div className="container mt-5">
@@ -17,31 +33,58 @@ const TableRole = (props) => {
           Table Roles :
         </span>
         <div className="d-flex flex-column">
-          {Object.entries(role).map(([key, value], i) => {
-            return (
-              <div key={key} className="input-group mb-3 gap-3">
-                <input
-                  type="text"
-                  placeholder="url"
-                  className="form-control rounded-3 border border-1 px-4 py-2"
-                  required
-                  value={value.url}
-                />
-                <input
-                  type="text"
-                  placeholder="description"
-                  className="form-control rounded-3 border border-1 px-4 py-2"
-                  aria-label="Text input with checkbox"
-                />
-                <div className="input-group-text bg-dark">
-                  <input
-                    className="form-check-input mt-0 checked"
-                    type="checkbox"
-                  />
-                </div>
-              </div>
-            );
-          })}
+          <table className="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">url</th>
+                <th scope="col">description</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {Object.entries(currentRole).map(([item, value], index) => {
+                return (
+                  <tr key={value.id}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{value.url}</td>
+                    <td>{value.description}</td>
+                    <td className="action d-flex gap-2">
+                      <ModaEditRole
+                        url={value.url}
+                        description={value.description}
+                        id={value.id}
+                      />
+                      <ModalDeleteRole id={value.id} url={value.url} />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <div className="d-flex align-center justify-content-center">
+            <ReactPaginate
+              onPageChange={handlePageClick}
+              pageCount={totalPage}
+              nextLabel="next >"
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={2}
+              previousLabel="< previous"
+              pageClassName="page-item"
+              pageLinkClassName="page-link"
+              previousClassName="page-item"
+              previousLinkClassName="page-link"
+              nextClassName="page-item"
+              nextLinkClassName="page-link"
+              breakLabel="..."
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
+              containerClassName="pagination"
+              activeClassName="active"
+              renderOnZeroPageCount={null}
+            />
+          </div>
         </div>
       </div>
     </>

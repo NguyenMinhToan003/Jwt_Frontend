@@ -5,6 +5,7 @@ import User from "../component/ManageUser/user";
 import Project from "../component/Project/project";
 import { Switch, Route } from "react-router-dom";
 import PrivateRouter from "./PrivateRoute";
+import GroupRole from "../component/groupWithRole/GroupRole";
 
 const AppRouter = (props) => {
   return (
@@ -16,6 +17,7 @@ const AppRouter = (props) => {
         <PrivateRouter path="/role" component={Role} />
         <PrivateRouter path="/user" component={User} />
         <PrivateRouter path="/project" component={Project} />
+        <PrivateRouter path="/grouprole" component={GroupRole} />
         <Route path="/about">about</Route>
         <Route path="/login">
           <Login />

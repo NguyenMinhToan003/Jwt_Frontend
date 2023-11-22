@@ -1,10 +1,12 @@
 import "./role.scss";
-import { useState } from "react";
 import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
-import { createRole } from "../../services/roleService";
+import { createRole } from "../../services/permissionService";
+import { useEffect, useState } from "react";
 import TableRole from "./TableRole";
+import { DeleteRole } from "../../services/permissionService";
+
 const Role = (props) => {
   let [role, setRole] = useState({});
   let [deleteRole, setDeleteRole] = useState({});
@@ -81,6 +83,9 @@ const Role = (props) => {
       setDeleteRole({});
     }
   };
+  const handlerRefresh = () => {
+    window.location.reload();
+  };
 
   return (
     <>
@@ -88,11 +93,16 @@ const Role = (props) => {
         <span className="d-flex align-center justify-content-center fw-bold fs-2  mt-3">
           Roles
         </span>
-        <div className="option d-flex justify-content-end  mb-2">
+        <div className="option d-flex justify-content-end  mb-2 gap-2">
           <button
             className="btn btn-warning fw-bolder "
             onClick={() => handlerAddRole(role)}>
             + Role
+          </button>
+          <button
+            className="btn btn-success fw-bolder "
+            onClick={() => handlerRefresh()}>
+            Refresh
           </button>
         </div>
         <div className="d-flex flex-column">
@@ -149,8 +159,8 @@ const Role = (props) => {
             </button>
           )}
         </div>
+        <TableRole />
       </div>
-      <TableRole />
     </>
   );
 };
