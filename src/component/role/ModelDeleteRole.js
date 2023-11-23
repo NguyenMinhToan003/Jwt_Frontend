@@ -17,8 +17,7 @@ const ModalDeleteRole = (props) => {
     if (response && response.EC == 0) {
       toast.success(response.EM);
       setShow(false);
-    }
-    toast.danger(response.EM);
+    } else toast.error(response.EM);
   };
   return (
     <>

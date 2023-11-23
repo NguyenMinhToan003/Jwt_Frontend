@@ -108,6 +108,7 @@ const User = (props) => {
               <th scope="col">Name</th>
               <th scope="col">Email</th>
               <th scope="col">Address</th>
+              <th scope="col">Group</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -120,6 +121,7 @@ const User = (props) => {
                   <td>{item.name}</td>
                   <td>{item.email}</td>
                   <td>{item.address}</td>
+                  <td>{item.Group.name}</td>
                   <td className="action d-flex gap-2">
                     <button
                       className="btn btn-warning"

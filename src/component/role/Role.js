@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { createRole } from "../../services/permissionService";
 import { useEffect, useState } from "react";
 import TableRole from "./TableRole";
-import { DeleteRole } from "../../services/permissionService";
 
 const Role = (props) => {
   let [role, setRole] = useState({});

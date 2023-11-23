@@ -18,8 +18,13 @@ const DeleteRole = async (id) => {
 const readGroup = async (req, res) => {
   return await axios.get("http://localhost:4000/api/v1/group/read");
 };
+const readAllRole = async () => {
+  return await axios.get("http://localhost:4000/api/v1/role");
+};
 const readGroupWithRole = async (req, res) => {
-  return await axios.post("http://localhost:4000/api/v1/groupwithrole", req);
+  return await axios.get(
+    `http://localhost:4000/api/v1/groupwithrole?id=${req.id}`
+  );
 };
 
 export {
@@ -29,4 +34,5 @@ export {
   readGroupWithRole,
   UpdateRole,
   DeleteRole,
+  readAllRole,
 };
