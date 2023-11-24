@@ -3,9 +3,11 @@ import {
   readGroup,
   readGroupWithRole,
   readAllRole,
+  createGroupWithRole,
 } from "../../services/permissionService";
 import Dropdown from "react-bootstrap/Dropdown";
-import _, { cloneDeepWith } from "lodash";
+import _ from "lodash";
+import { toast } from "react-toastify";
 
 const Group = (props) => {
   const [group, setGroup] = useState([]);
@@ -66,10 +68,6 @@ const Group = (props) => {
     return result;
   };
 
-  useEffect(() => {
-    console.log(role);
-  }, [role]);
-
   const handleChangeRole = (id) => {
     let cloneRole = _.cloneDeep(role);
     let selectRoleIndex = cloneRole.findIndex((item) => item.id === id);
@@ -80,6 +78,32 @@ const Group = (props) => {
       };
     }
     setRole(cloneRole);
+  };
+  const buildDataSubmit = (data) => {
+    let result = [];
+    let roleClone = _.cloneDeep(data);
+    roleClone.map((item, index) => {
+      if (item.isAssigned) {
+        let ob = {};
+        ob.roleId = item.id;
+        ob.GroupId = currentGroup.id;
+        result = [...result, ob];
+      }
+    });
+    if (result.length === 0) {
+      let ob = {};
+      ob.GroupId = currentGroup.id;
+      ob.isEmpty = true;
+      result = [ob];
+    } else result[0].isEmpty = false;
+    return result;
+  };
+  const handleSubmit = async () => {
+    let data = buildDataSubmit(role);
+    let response = await createGroupWithRole(data);
+    if (response && response.EC === 0) {
+      toast.info(response.EM);
+    } else toast.error(response.EM);
   };
 
   return (
@@ -118,7 +142,13 @@ const Group = (props) => {
           </div>
         ))}
       </div>
-      <button className="btn btn-warning">Save</button>
+      <button
+        className="btn btn-warning"
+        onClick={() => {
+          handleSubmit();
+        }}>
+        Save
+      </button>
     </div>
   );
 };

@@ -26,6 +26,11 @@ const readGroupWithRole = async (req, res) => {
     `http://localhost:4000/api/v1/groupwithrole?id=${req.id}`
   );
 };
+const createGroupWithRole = async (req, res) => {
+  return await axios.post(`http://localhost:4000/api/v1/groupwithrole/create`, [
+    ...req,
+  ]);
+};
 
 export {
   createRole,
@@ -35,4 +40,5 @@ export {
   UpdateRole,
   DeleteRole,
   readAllRole,
+  createGroupWithRole,
 };
