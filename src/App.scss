@@ -1,7 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rambla&family=Rubik:ital,wght@0,400;0,500;0,600;1,600&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+ul {
+  list-style: none;
+  padding-left: 0 !important;
+}
+html {
+  font-family: "Rubik", sans-serif;
+}
+body {
+  background-color: #f5f6f8;
 }
 .loading {
   background-color: rgba(128, 128, 128, 0.265);
@@ -12,7 +24,3 @@
   justify-content: center;
   flex-direction: column;
 }
-// html {
-//   font-family: "IBM Plex Sans", sans-serif;
-//   font-family: "Roboto", sans-serif;
-// }

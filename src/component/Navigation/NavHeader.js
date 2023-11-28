@@ -47,8 +47,8 @@ const NavHeader = () => {
               <NavLink to="/group" className="nav-link">
                 Group-Role
               </NavLink>
-              <NavLink to="/project" className="nav-link">
-                Project
+              <NavLink to="/buyEbook" className="nav-link">
+                Buy Ebook
               </NavLink>
               <NavLink to="/about" className="nav-link">
                 About
@@ -58,7 +58,7 @@ const NavHeader = () => {
               <Nav>
                 <Nav.Link>Welcome {dataUser.account.name}!</Nav.Link>
                 <NavDropdown
-                  title="Settings"
+                  title="Account"
                   id="basic-nav-dropdown"
                   className="nav-dropdown nav-brand">
                   <NavDropdown.Item

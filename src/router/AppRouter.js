@@ -2,22 +2,23 @@ import Login from "../component/Login/Login";
 import SignUp from "../component/Signup/signup";
 import Role from "../component/role/Role";
 import User from "../component/ManageUser/user";
-import Project from "../component/Project/project";
+import BuyEbook from "../component/BuyEbook/BuyEbook";
 import { Switch, Route } from "react-router-dom";
 import PrivateRouter from "./PrivateRoute";
 import Group from "../component/group/Group";
+import Home from "../component/home/Home";
 
 const AppRouter = (props) => {
   return (
     <>
       <Switch>
         <Route path="/" exact>
-          home
+          <Home />
         </Route>
         <PrivateRouter path="/group" component={Group} />
         <PrivateRouter path="/role" component={Role} />
         <PrivateRouter path="/user" component={User} />
-        <PrivateRouter path="/project" component={Project} />
+        <PrivateRouter path="/buyEbook" component={BuyEbook} />
 
         <Route path="/about">about</Route>
         <Route path="/login">
