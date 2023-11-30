@@ -1,7 +1,8 @@
 import Category from "./Category";
-import Ebook1 from "./Ebook1";
-import Ebook2 from "./Ebook2";
+import Ebook1 from "../EBook/Ebook1";
+import Ebook2 from "../EBook/Ebook2";
 import "./home.scss";
+import Header from "../Header/Header";
 const Home = (props) => {
   return (
     <>
@@ -43,6 +44,7 @@ const Home = (props) => {
           </div>
         </div>
       </div>
+      <Header />
     </>
   );
 };

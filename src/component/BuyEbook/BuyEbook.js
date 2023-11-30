@@ -1,6 +1,7 @@
 import Category from "../home/Category";
-import BuyEb from "./BuyEb";
-import "./ebook.scss";
+import BuyEb from "../EBook/BuyEb";
+import "./buyEbook.scss";
+import Header from "../Header/Header";
 const BuyEbook = (props) => {
   return (
     <>
@@ -20,6 +21,7 @@ const BuyEbook = (props) => {
           <BuyEb />
         </div>
       </div>
+      <Header />
     </>
   );
 };

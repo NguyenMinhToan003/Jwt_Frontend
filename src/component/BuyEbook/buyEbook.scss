@@ -1,0 +1,14 @@
+.ebook {
+  margin-top: 88px;
+  font-size: 20px;
+  font-weight: 400;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 59px;
+  &-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 63px;
+    grid-auto-rows: minmax(338px, auto);
+  }
+}

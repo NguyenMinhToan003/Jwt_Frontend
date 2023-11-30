@@ -7,6 +7,7 @@ import { UserContext } from "./context/UserContext";
 import NavHeader from "./component/Navigation/NavHeader";
 import { AppRouter } from "./router/AppRouter";
 import { ColorRing } from "react-loader-spinner";
+import Header from "./component/Header/Header";
 
 function App() {
   let { dataUser } = useContext(UserContext);

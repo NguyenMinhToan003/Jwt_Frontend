@@ -7,6 +7,7 @@ import { Switch, Route } from "react-router-dom";
 import PrivateRouter from "./PrivateRoute";
 import Group from "../component/group/Group";
 import Home from "../component/home/Home";
+import DetailEbook from "../component/EBook/DetailBook";
 
 const AppRouter = (props) => {
   return (
@@ -15,11 +16,11 @@ const AppRouter = (props) => {
         <Route path="/" exact>
           <Home />
         </Route>
+        <PrivateRouter path="/detailBook" component={DetailEbook} />
         <PrivateRouter path="/group" component={Group} />
         <PrivateRouter path="/role" component={Role} />
         <PrivateRouter path="/user" component={User} />
         <PrivateRouter path="/buyEbook" component={BuyEbook} />
-
         <Route path="/about">about</Route>
         <Route path="/login">
           <Login />
