@@ -13,7 +13,7 @@ const Ebook2 = (props) => {
           <span className="book2-title">Tentang kamu</span>
           <span className="book2-author">tere liye</span>
           <div className="book2-vote">
-            <VoteStar n={4} />
+            <VoteStar n={3} />
           </div>
         </div>
       </div>

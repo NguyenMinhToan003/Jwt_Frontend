@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import ModeAlert from "./modelAlert";
 import ModelCreate from "./modelCreate";
 import ModelEdit from "./modelEdit";
-// import Test from "./test";
+import NavShop from "../Navigation/NavShop";
 
 const User = (props) => {
   const [user, setUser] = useState([]);
@@ -70,6 +70,7 @@ const User = (props) => {
 
   return (
     <>
+      <NavShop />
       <ModelEdit
         show={isShowModelEdit}
         close={handlerCloseModelEdit}

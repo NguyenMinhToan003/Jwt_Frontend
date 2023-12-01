@@ -4,12 +4,21 @@ import Dot from "../../photo/dot";
 import Cancel from "../../photo/CancelIcon";
 import VoteStar from "../../photo/voteStar";
 import Photo from "../../photo/photo-book3.png";
+import { useHistory } from "react-router-dom";
 const DetailEbook = (props) => {
+  let history = useHistory();
+  const handlerCancel = () => {
+    history.push("/buyEbook");
+  };
   return (
     <>
       <div className="ebookDetail">
         <div className="ebookDetail-header"></div>
-        <div className="cancel">
+        <div
+          className="cancel"
+          onClick={() => {
+            handlerCancel();
+          }}>
           <Cancel />
         </div>
 

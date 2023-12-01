@@ -1,5 +1,5 @@
 .nav {
-  background-color: #20232a;
+  background-color: white;
   font-weight: 400;
   font-size: 14px;
   white-space: nowrap;
@@ -17,11 +17,8 @@
   }
 }
 .nav-link {
-  color: gray !important;
+  color: black !important;
   &:hover {
     color: #61dafb !important;
   }
-}
-.active {
-  color: white !important;
 }

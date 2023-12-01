@@ -5,6 +5,7 @@ import {
   readAllRole,
   createGroupWithRole,
 } from "../../services/permissionService";
+import NavHeader from "../Navigation/NavHeader";
 import Dropdown from "react-bootstrap/Dropdown";
 import _ from "lodash";
 import { toast } from "react-toastify";
@@ -107,49 +108,55 @@ const Group = (props) => {
   };
 
   return (
-    <div className="container mt-3">
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          {currentGroup.name || "Choose Group"}
-        </Dropdown.Toggle>
+    <>
+      {" "}
+      <NavHeader />
+      <div className="container mt-3">
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            {currentGroup.name || "Choose Group"}
+          </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          {group.map((item, index) => (
-            <Dropdown.Item key={index} onClick={() => handleChooseGroup(item)}>
-              {item.name}
-            </Dropdown.Item>
+          <Dropdown.Menu>
+            {group.map((item, index) => (
+              <Dropdown.Item
+                key={index}
+                onClick={() => handleChooseGroup(item)}>
+                {item.name}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <div>
+          {role.map((item, index) => (
+            <div className="form-check" key={index}>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id={`flexCheckDefault-${index}`}
+                checked={item.isAssigned}
+                onChange={() => {
+                  handleChangeRole(item.id);
+                }}
+              />
+              <label
+                className="form-check-label"
+                htmlFor={`flexCheckDefault-${index}`}>
+                {item.url}
+              </label>
+            </div>
           ))}
-        </Dropdown.Menu>
-      </Dropdown>
-
-      <div>
-        {role.map((item, index) => (
-          <div className="form-check" key={index}>
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id={`flexCheckDefault-${index}`}
-              checked={item.isAssigned}
-              onChange={() => {
-                handleChangeRole(item.id);
-              }}
-            />
-            <label
-              className="form-check-label"
-              htmlFor={`flexCheckDefault-${index}`}>
-              {item.url}
-            </label>
-          </div>
-        ))}
+        </div>
+        <button
+          className="btn btn-warning"
+          onClick={() => {
+            handleSubmit();
+          }}>
+          Save
+        </button>
       </div>
-      <button
-        className="btn btn-warning"
-        onClick={() => {
-          handleSubmit();
-        }}>
-        Save
-      </button>
-    </div>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { createRole } from "../../services/permissionService";
 import { useEffect, useState } from "react";
 import TableRole from "./TableRole";
+import NavHeader from "../Navigation/NavHeader";
 
 const Role = (props) => {
   let [role, setRole] = useState({});
@@ -88,6 +89,7 @@ const Role = (props) => {
 
   return (
     <>
+      <NavHeader />
       <div className="container">
         <span className="d-flex align-center justify-content-center fw-bold fs-2  mt-3">
           Roles

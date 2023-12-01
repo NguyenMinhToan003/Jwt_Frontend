@@ -1,7 +1,7 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import { readGroup, readGroupWithRole } from "../../services/permissionService";
 import { useState, useEffect } from "react";
-
+import NavHeader from "../Navigation/NavHeader";
 import "./groupRole.scss";
 
 const GroupRole = (props) => {
@@ -33,6 +33,7 @@ const GroupRole = (props) => {
   };
   return (
     <>
+      <NavHeader />
       <div className="container">
         {group && group.length > 0 && (
           <Dropdown className="mt-2">
