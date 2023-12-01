@@ -3,9 +3,11 @@ import Ebook1 from "../EBook/Ebook1";
 import Ebook2 from "../EBook/Ebook2";
 import "./home.scss";
 import Header from "../Header/Header";
+import NavHeader from "../Navigation/NavShop";
 const Home = (props) => {
   return (
     <>
+      <NavHeader />
       <div className=" mt-5 home">
         <Category />
         <div className="home-content">

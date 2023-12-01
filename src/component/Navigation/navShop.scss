@@ -1,0 +1,137 @@
+.navshop {
+  position: relative;
+  width: 100%;
+  height: 613px;
+  padding-left: 145px;
+  font-weight: 400;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  background-color: white;
+  &-menu {
+    z-index: 5;
+    margin: 54px 80px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Rubik;
+    font-weight: 500;
+    &-left,
+    &-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Rubik;
+      font-size: 16px;
+    }
+    &-left {
+      color: #000;
+      font-size: 30px;
+      font-weight: 400;
+      .crt {
+        font-weight: 500;
+        font-family: Rubik;
+        font-size: 30px;
+      }
+      &-brand {
+        cursor: pointer;
+        padding-right: 20px;
+        border-right: 0.8px #dedede solid;
+      }
+      &-bag {
+        cursor: pointer;
+        margin-left: 20px;
+      }
+    }
+    &-right {
+      color: #fff;
+      gap: 45px;
+      &-link {
+        padding-bottom: 12px;
+        color: #fff;
+        font-family: Rubik;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  &-filter {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  &-photo {
+    position: absolute;
+    top: 128px;
+    right: 69.93px;
+    width: 538px;
+    height: 358px;
+  }
+  &-title {
+    max-width: 713px;
+    margin-top: 80px;
+    font-size: 75px;
+    font-weight: 700;
+    line-height: 1.26;
+    text-transform: uppercase;
+  }
+  &-text {
+    font-family: Rambla;
+    font-size: 25px;
+    line-height: 1.6;
+    text-transform: capitalize;
+  }
+  &-search {
+    margin-top: 8px;
+    width: 406px;
+    height: 60px;
+    background: #f5f6f8;
+    padding: 20px 3px 20px 45px;
+    position: relative;
+    input {
+      background: #f5f6f8;
+      width: 100%;
+      color: rgba(0, 0, 0, 0.3);
+      font-family: Karla;
+      font-size: 16px;
+      border: 0;
+      outline: none;
+    }
+
+    ::-webkit-input-placeholder,
+    :-ms-input-placeholder,
+    ::placeholder {
+      color: rgba(0, 0, 0, 0.3);
+      font-family: Karla;
+      font-size: 16px;
+    }
+
+    &-icon {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 18px;
+      left: 15px;
+      transform: translate(2px, 2px);
+    }
+  }
+}
+
+.active {
+  border-bottom: 3px white solid;
+}
+.dot {
+  position: absolute;
+  bottom: 2px;
+  right: 8px;
+}
+.circel {
+  position: fixed;
+  top: 100px;
+  right: -347px;
+  border-radius: 500px;
+  border: 25px solid rgba(245, 246, 248, 0.3);
+  width: 482.783px;
+  height: 500px;
+}

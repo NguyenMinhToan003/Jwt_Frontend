@@ -8,6 +8,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { logoutAccount } from "../../services/registerService";
+import Bag from "../../photo/Bag";
 const NavHeader = () => {
   const { dataUser, logoutContext } = useContext(UserContext);
   const location = useLocation();
@@ -32,6 +33,9 @@ const NavHeader = () => {
       <Navbar expand="lg" className="bg-body-tertiary nav">
         <Container>
           <Navbar.Brand className="nav-brand">React</Navbar.Brand>
+          <Navbar>
+            <Bag />
+          </Navbar>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto ">

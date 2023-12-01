@@ -20,7 +20,7 @@ const Ebook3 = (props) => {
             </div>
             <span className="ebook3-info-text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus
-              morbi eleifend enim, tristique{" "}
+              morbi eleifend enim, tristique
             </span>
           </div>
         </div>

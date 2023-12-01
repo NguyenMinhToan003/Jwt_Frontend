@@ -5,8 +5,9 @@
   font-size: 25px;
   font-weight: 400;
   cursor: pointer;
+  height: 225px;
   &-image {
-    width: 100%;
+    min-width: 147px;
     height: 100%;
     transition: all 0.25s ease-in-out;
     background-color: black;
@@ -62,10 +63,11 @@
 
 .book2 {
   cursor: pointer;
+  height: 288px;
   &-image {
     transition: all 0.25s ease-in-out;
-    height: 288px;
-    width: 100%;
+    width: 188px;
+    height: 100%;
     background: url("../../photo/photo-book.png"),
       lightgray 50% / cover no-repeat;
     box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.2);
@@ -85,6 +87,7 @@
     justify-content: center;
   }
   &-title {
+    margin: 25px 0 12px 0;
     text-transform: capitalize;
   }
   &-author {
@@ -112,7 +115,6 @@
     min-width: 147px;
     height: 255px;
     background-color: #000;
-
     background: url("../../photo/photo-book4.png"),
       lightgray 50% / cover no-repeat;
     box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.2);

@@ -14,7 +14,7 @@ const Ebook1 = (props) => {
           <span className="book-info-author">by anthony doerr</span>
           <div className="book-info-vote">
             <div>
-              <VoteStar n={5} />
+              <VoteStar n={4} />
             </div>
             <span className="book-info-vote-number">1,988,288 votes</span>
           </div>

@@ -5,9 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
 import NavHeader from "./component/Navigation/NavHeader";
+import NavShop from "./component/Navigation/NavShop";
 import { AppRouter } from "./router/AppRouter";
 import { ColorRing } from "react-loader-spinner";
-import Header from "./component/Header/Header";
 
 function App() {
   let { dataUser } = useContext(UserContext);
@@ -31,14 +31,13 @@ function App() {
       ) : (
         <>
           <div className="App-container">
-            <header className="App-header">
-              <NavHeader />
-            </header>
+            {/* <header className="App-header">
+              <NavShop />
+            </header> */}
+            <AppRouter />
           </div>
-          <AppRouter />
         </>
       )}
-
       <ToastContainer
         position="bottom-center"
         autoClose={5000}
