@@ -13,23 +13,6 @@ const DetailEbook = (props) => {
   return (
     <>
       <div className="ebookDetail">
-        <div className="ebookDetail-header"></div>
-        <div
-          className="cancel"
-          onClick={() => {
-            handlerCancel();
-          }}>
-          <Cancel />
-        </div>
-
-        <div className="dot dot1">
-          <Dot />
-        </div>
-        <div className="dot dot2">
-          <Dot />
-        </div>
-        <div className="cicel1 cicel"></div>
-        <div className="cicel2 cicel"></div>
         <div>
           <div className="ebookDetail-content">
             <div className="ebookDetail-main">
@@ -85,10 +68,10 @@ const DetailEbook = (props) => {
                 <div className="ebookDetail-detail-info">
                   <span className="detail-title">Informasi Tambahan</span>
                 </div>
-                <button className="ebookDetail-detail-seeComment">
-                  See comment
-                </button>
               </div>
+              <button className="ebookDetail-detail-seeComment">
+                See comment
+              </button>
             </div>
             <div className="ebookDetail-list">
               <span className="ebookDetail-list-title">Cerita serupa</span>
@@ -99,6 +82,23 @@ const DetailEbook = (props) => {
             </div>
           </div>
         </div>
+        <div className="ebookDetail-header"></div>
+        <div
+          className="cancel"
+          onClick={() => {
+            handlerCancel();
+          }}>
+          <Cancel />
+        </div>
+
+        <div className="dot dot1">
+          <Dot />
+        </div>
+        <div className="dot dot2">
+          <Dot />
+        </div>
+        <div className="cicel1 cicel"></div>
+        <div className="cicel2 cicel"></div>
       </div>
     </>
   );

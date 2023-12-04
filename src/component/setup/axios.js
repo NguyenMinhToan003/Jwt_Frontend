@@ -41,8 +41,13 @@ instance.interceptors.response.use(
     switch (status) {
       case 401:
         return error.response.data;
+
       case 403:
         arlet = "Not Permission resource ";
+        break;
+
+      default:
+        return;
     }
     toast.error(`${arlet}.... `);
     return Promise.reject(error);

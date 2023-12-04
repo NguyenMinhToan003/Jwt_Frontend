@@ -19,7 +19,6 @@ const UserProvider = ({ children }) => {
   const fetchUser = async () => {
     let response = await getAccount();
     if (response && +response.EC === 0) {
-      let useNav = false;
       let email = response.DT.email;
       let name = response.DT.name;
       let groupWithRole = response.DT.groupWithRole.Roles;

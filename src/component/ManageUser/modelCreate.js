@@ -1,6 +1,6 @@
 // import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import "./user.scss";
 import { toast } from "react-toastify";
 import { createUser } from "../../services/userService";

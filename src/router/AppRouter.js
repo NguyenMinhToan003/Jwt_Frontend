@@ -8,6 +8,8 @@ import PrivateRouter from "./PrivateRoute";
 import Group from "../component/group/Group";
 import Home from "../component/home/Home";
 import DetailEbook from "../component/EBook/DetailBook";
+import UploadEbook from "../component/UploadEbook/UploadEbook";
+import UploadFile from "../component/test/uploadFile";
 
 const AppRouter = (props) => {
   return (
@@ -16,6 +18,8 @@ const AppRouter = (props) => {
         <Route path="/" exact>
           <Home />
         </Route>
+        <Route path="/test" component={UploadFile} />
+        <PrivateRouter path="/uploadebook" component={UploadEbook} />
         <PrivateRouter path="/detailBook" component={DetailEbook} />
         <PrivateRouter path="/group" component={Group} />
         <PrivateRouter path="/role" component={Role} />

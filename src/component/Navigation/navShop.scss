@@ -40,7 +40,11 @@
       }
       &-bag {
         cursor: pointer;
-        margin-left: 20px;
+        margin: 0px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
       }
     }
     &-right {

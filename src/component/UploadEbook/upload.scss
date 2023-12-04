@@ -1,0 +1,160 @@
+.upload {
+  margin: 20px auto;
+  width: 95vw;
+  display: grid;
+  grid-template-columns: 441px 1fr;
+  border-radius: 16px;
+  border: 1px solid #3b4256;
+  background: #fff;
+  padding: 48px;
+  gap: 75px;
+  &-container {
+    padding: 18px;
+    border: 1px dashed #7b61ff;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  &-output {
+    &-main {
+      display: flex;
+      gap: 36px;
+      height: 435px;
+      &-photo {
+        width: 287px;
+        background: lightgray 50% / cover no-repeat;
+        box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.2);
+      }
+      &-info {
+        font-family: Rambla;
+        font-size: 16px;
+        font-weight: 400;
+        text-transform: capitalize;
+        color: rgba(0, 0, 0, 0.6);
+        margin-top: 130px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        gap: 25px;
+        &-btn {
+          display: flex;
+          gap: 20px;
+          .buy {
+            display: flex;
+            width: 176.5px;
+            padding: 12px 28px;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            border-radius: 10px;
+            background: #ff971d;
+            border: 1px solid #ff971d;
+          }
+          .read {
+            display: flex;
+            padding: 12px 28px;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            flex: 1 0 0;
+            border-radius: 10px;
+            border: 1px solid #ff971d;
+          }
+        }
+        &-name {
+          color: #000;
+          font-family: Rubik;
+          font-size: 57px;
+          font-style: normal;
+          font-weight: 500;
+        }
+        &-author,
+        &-text {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 25px;
+        }
+      }
+    }
+    &-description {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      align-items: start;
+      justify-content: center;
+      margin: 57px 37px;
+      color: rgba(0, 0, 0, 0.6);
+      font-family: Rambla;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.62;
+      letter-spacing: 0.064px;
+      span {
+        color: #000;
+        font-family: Rubik;
+        font-size: 25px;
+        line-height: 0.92;
+        letter-spacing: 0.075px;
+      }
+    }
+  }
+  &-input {
+    color: #3b4256;
+    font-family: IBM Plex Sans;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.16px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    &-name,
+    &-author,
+    &-description,
+    &-vote {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 2px;
+      span {
+        color: #52575c;
+        font-weight: 700;
+        line-height: normal;
+      }
+      div {
+        width: 100%;
+        border-radius: 4px;
+        border: 1px solid #f8fafc;
+        background: #f8fafc;
+        padding: 12px;
+        input {
+          background: #f8fafc;
+          outline: none;
+          border: 0px;
+        }
+        textarea {
+          width: 100%;
+          background: #f8fafc;
+          outline: none;
+          border: 0px;
+          resize: none;
+          height: 9rem;
+        }
+        &:hover {
+          border: 1px solid #0048d9;
+        }
+      }
+    }
+    &-btn {
+      color: #0048d9;
+      text-align: center;
+      font-weight: 500;
+      line-height: 1.5;
+      border-radius: 6px;
+      border: 1px solid #0048d9;
+    }
+  }
+}
