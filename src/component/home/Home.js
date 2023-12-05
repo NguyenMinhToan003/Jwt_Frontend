@@ -4,6 +4,7 @@ import Ebook2 from "../EBook/Ebook2";
 import "./home.scss";
 import Header from "../Header/Header";
 import NavHeader from "../Navigation/NavShop";
+
 const Home = (props) => {
   return (
     <>
@@ -31,10 +32,10 @@ const Home = (props) => {
             <span className="title">This new story</span>
 
             <div className="list-book1">
+              {/* <Ebook1 />
               <Ebook1 />
               <Ebook1 />
-              <Ebook1 />
-              <Ebook1 />
+              <Ebook1 /> */}
             </div>
             <span className="title">Which they like</span>
             <div className="list-book2">

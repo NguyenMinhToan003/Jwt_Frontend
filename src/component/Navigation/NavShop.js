@@ -18,7 +18,7 @@ const NavShop = (props) => {
             </div>
             <div className="navshop-menu-left-bag">
               <Bag />
-              <NavLink to="/uploadebook">
+              <NavLink to="/book/upload">
                 <Add />
               </NavLink>
             </div>

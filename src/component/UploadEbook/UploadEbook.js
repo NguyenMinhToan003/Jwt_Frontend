@@ -1,26 +1,52 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ebookUpload } from "../../services/bookService";
 import { toast } from "react-toastify";
 import "./upload.scss";
 import VoteStar from "../../photo/voteStar";
 import Photo from "../../photo/photo-book2.png";
-
+import moment from "moment";
 const UploadFile = (props) => {
+  const [status, setStatus] = useState(false);
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [des, setDes] = useState("");
   const [vote, setVote] = useState(0);
   const [file, setFile] = useState();
   const [img, setImg] = useState();
+  const [date, setDate] = useState(moment());
   const handlePriview = () => {
+    if (!name || !author || !des || !vote || !file || !date) return;
+    setStatus(true);
     setImg(URL.createObjectURL(file));
+  };
+  const handleSubmit = async () => {
+    let formData = new FormData();
+    formData.append("image", file);
+    formData.append("name", name);
+    formData.append("date", date);
+    formData.append("author", author);
+    formData.append("vote", vote);
+    formData.append("description", des);
+    let response = await ebookUpload(formData);
+    if (response && +response.EC === 0) {
+      toast.success(response.EM);
+    } else toast.error(response.EM);
   };
   return (
     <>
       <div className="upload">
+        {status && (
+          <div
+            className="btn btn-success upload-btn"
+            onClick={() => {
+              handleSubmit();
+            }}>
+            Upload EBook
+          </div>
+        )}
         <div className="upload-container">
           <div className="upload-input">
-            <span className="upload-input-tilte">Input EBook</span>
+            <span className="upload-input-title">Input EBook</span>
             <div className="upload-input-name">
               <span>Name</span>
               <div>
@@ -51,6 +77,16 @@ const UploadFile = (props) => {
                   onChange={(event) => {
                     setDes(event.target.value);
                   }}
+                />
+              </div>
+            </div>
+            <div className="upload-input-date">
+              <span>Date</span>
+              <div>
+                <input
+                  type="date"
+                  value={date.format("YYYY-MM-DD")}
+                  onChange={(e) => setDate(moment(e.target.value))}
                 />
               </div>
             </div>
@@ -97,7 +133,9 @@ const UploadFile = (props) => {
                   <span className="author">
                     {author ? author : "by Fiersa besari"}
                   </span>
-                  <span className="date">1 juli 2016</span>
+                  <span className="date">
+                    {date ? date.format("D MMMM YYYY") : "1 juli 2016"}
+                  </span>
                 </div>
                 <div className="upload-output-main-info-votestar">
                   <VoteStar n={vote} />
