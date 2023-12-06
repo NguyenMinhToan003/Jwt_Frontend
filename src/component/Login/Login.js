@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useRef, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Login.scss";
 import { NavLink } from "react-router-dom";

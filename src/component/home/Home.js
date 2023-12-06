@@ -4,6 +4,7 @@ import Ebook2 from "../EBook/Ebook2";
 import "./home.scss";
 import Header from "../Header/Header";
 import NavHeader from "../Navigation/NavShop";
+
 const Home = (props) => {
   return (
     <>

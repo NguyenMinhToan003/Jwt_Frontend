@@ -10,7 +10,7 @@ const TableRole = (props) => {
   const [currentRole, setCurrentRole] = useState({});
   const fetchRole = async () => {
     let response = await readRole(page, limit);
-    if (response && response.EC == 0) {
+    if (response && response.EC === 0) {
       let role = response.DT.role;
       let totalPage = response.DT.totalPage;
       setCurrentRole(role);

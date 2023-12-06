@@ -5,6 +5,7 @@ import PhotoBook from "../../photo/book.png";
 import Bag from "../../photo/Bag";
 import { NavLink } from "react-router-dom";
 import Dot from "../../photo/dot";
+import Add from "../../photo/Add";
 const NavShop = (props) => {
   return (
     <>
@@ -17,6 +18,9 @@ const NavShop = (props) => {
             </div>
             <div className="navshop-menu-left-bag">
               <Bag />
+              <NavLink to="/book/upload">
+                <Add />
+              </NavLink>
             </div>
           </div>
           <div className="navshop-menu-right">

@@ -8,7 +8,7 @@
     left: 0;
     right: 0;
     height: 580px;
-    background: #ff971d;
+    background: #14ae5c;
   }
   .cancel {
     cursor: pointer;
@@ -50,7 +50,7 @@
   &-content {
     margin-top: 150px;
     display: grid;
-    grid-template-columns: 1fr 600px;
+    grid-template-columns: 1fr 450px;
     gap: 41px;
   }
   &-list {
@@ -91,8 +91,11 @@
         text-transform: capitalize;
         &-name {
           color: #000;
+          font-family: Rubik;
           font-size: 57px;
+          font-style: normal;
           font-weight: 500;
+          line-height: normal;
           text-transform: capitalize;
         }
         &-number {

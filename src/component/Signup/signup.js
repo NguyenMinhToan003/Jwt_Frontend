@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import "../Signup/signup.scss";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";

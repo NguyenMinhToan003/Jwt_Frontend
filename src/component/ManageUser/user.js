@@ -5,13 +5,12 @@ import { toast } from "react-toastify";
 import ModeAlert from "./modelAlert";
 import ModelCreate from "./modelCreate";
 import ModelEdit from "./modelEdit";
-import NavShop from "../Navigation/NavShop";
-
+import NavHeader from "../Navigation/NavHeader";
 const User = (props) => {
   const [user, setUser] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setlimit] = useState(7);
-  const [totalRows, setTotalRows] = useState(0);
+  // const [totalRows, setTotalRows] = useState(0);
   const [selectUser, setSelectUser] = useState({});
   const [totalPage, setTotalPage] = useState(0);
   const [isShowModelAlert, setIsShowModelAlert] = useState(false);
@@ -70,7 +69,7 @@ const User = (props) => {
 
   return (
     <>
-      <NavShop />
+      <NavHeader />
       <ModelEdit
         show={isShowModelEdit}
         close={handlerCloseModelEdit}

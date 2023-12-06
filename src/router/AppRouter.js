@@ -8,26 +8,23 @@ import PrivateRouter from "./PrivateRoute";
 import Group from "../component/group/Group";
 import Home from "../component/home/Home";
 import DetailEbook from "../component/EBook/DetailBook";
+import UploadEbook from "../component/UploadEbook/UploadEbook";
+import UploadFile from "../component/test/uploadFile";
 
 const AppRouter = (props) => {
   return (
     <>
       <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
+        <Route path="/" exact component={Home} />
+        <Route path="/test" component={UploadFile} />
+        <PrivateRouter path="/book/upload" component={UploadEbook} />
         <PrivateRouter path="/detailBook" component={DetailEbook} />
         <PrivateRouter path="/group" component={Group} />
         <PrivateRouter path="/role" component={Role} />
         <PrivateRouter path="/user" component={User} />
         <PrivateRouter path="/buyEbook" component={BuyEbook} />
-        <Route path="/about">about</Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUp} />
         <Route path="*">404 not found</Route>
       </Switch>
     </>
