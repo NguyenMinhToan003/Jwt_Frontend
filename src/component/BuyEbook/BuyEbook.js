@@ -4,40 +4,74 @@ import "./buyEbook.scss";
 import Header from "../Header/Header";
 import NavShop from "../Navigation/NavShop";
 import { ebookRead } from "../../services/bookService";
-import { useState } from "react";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
+import { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
+
 const BuyEbook = (props) => {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(6);
   const [ebook, setEbook] = useState([]);
+  const [totalPage, setTotalPage] = useState(0);
   const fetchEBook = async () => {
-    let data = await ebookRead();
-    setEbook(data.DT);
+    let data = await ebookRead(page, limit);
+    setEbook(data.DT.book);
+    setTotalPage(+data.DT.totalPage);
   };
   useEffect(() => {
     fetchEBook();
-    console.log(ebook);
   }, []);
+  useEffect(() => {
+    fetchEBook();
+  }, [page, setPage]);
+  const handlePageClick = (event) => {
+    setPage(event.selected + 1);
+  };
+
   return (
     <>
       <NavShop />
       <div className=" mt-5 ebook home">
         <Category />
-        <div className="ebook-list">
-          {ebook && ebook.length > 0
-            ? ebook.map((item, index) => {
-                console.log(item);
-                return (
-                  <BuyEb
-                    key={index}
-                    img={item.urlImage}
-                    name={item.name}
-                    description={item.description}
-                    author={item.author}
-                    vote={+item.vote}
-                  />
-                );
-              })
-            : ""}
+        <div className="container">
+          <div className="ebook-list">
+            {ebook && ebook.length > 0
+              ? ebook.map((item, index) => {
+                  return (
+                    <BuyEb
+                      key={item.id}
+                      id={item.id}
+                      img={item.urlImage}
+                      name={item.name}
+                      description={item.description}
+                      author={item.author}
+                      vote={+item.vote}
+                    />
+                  );
+                })
+              : ""}
+          </div>
+          <div className="paginate">
+            <ReactPaginate
+              nextLabel="next >"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={2}
+              pageCount={totalPage}
+              previousLabel="< previous"
+              pageClassName="page-item"
+              pageLinkClassName="page-link"
+              previousClassName="page-item"
+              previousLinkClassName="page-link"
+              nextClassName="page-item"
+              nextLinkClassName="page-link"
+              breakLabel="..."
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
+              containerClassName="pagination"
+              activeClassName="active"
+              renderOnZeroPageCount={null}
+            />
+          </div>
         </div>
       </div>
       <Header />

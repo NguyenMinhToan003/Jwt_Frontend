@@ -3,9 +3,26 @@ import Ebook3 from "./Ebook3";
 import Dot from "../../photo/dot";
 import Cancel from "../../photo/CancelIcon";
 import VoteStar from "../../photo/voteStar";
-import Photo from "../../photo/photo-book3.png";
 import { useHistory } from "react-router-dom";
+import { ebookDetail } from "../../services/bookService";
+import { useEffect } from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import moment from "moment";
 const DetailEbook = (props) => {
+  var queryString = window.location.search;
+  const [ebook, setEbook] = useState({});
+  const fetchData = async () => {
+    let response = await ebookDetail(queryString);
+    if (response && +response.EC === 0) {
+      var dateString = response.DT.date;
+      var formattedDate = moment(dateString).format("D MMMM YYYY");
+      setEbook({ ...response.DT, date: formattedDate });
+    } else toast.error(response.EM);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   let history = useHistory();
   const handlerCancel = () => {
     history.push("/buyEbook");
@@ -18,16 +35,16 @@ const DetailEbook = (props) => {
             <div className="ebookDetail-main">
               <div className="ebook-main">
                 <div className="ebook-main-photo">
-                  <img src={Photo} />
+                  <img src={ebook.urlImage} />
                 </div>
                 <div className="ebook-main-info">
                   <div className="ebook-main-info-container">
-                    <span className="ebook-main-info-name">garis waktu</span>
+                    <span className="ebook-main-info-name">{ebook.name}</span>
                     <div className="ebook-main-info-detail">
-                      <span>by Fiersa besari</span>
-                      <span>1 juli 2016</span>
+                      <span>{ebook.author}</span>
+                      <span>{ebook.date}</span>
                       <div>
-                        <VoteStar n={5} />
+                        <VoteStar n={ebook.vote} />
                       </div>
                     </div>
                     <div className="ebook-main-info-number">
@@ -47,18 +64,7 @@ const DetailEbook = (props) => {
               <div className="ebookDetail-detail">
                 <span className="ebookDetail-detail-title">Sinopsis</span>
                 <div className="ebookDetail-detail-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Varius nisl sed sit aliquet nullam pretium. Velit vel aliquam
-                  amet augue. Risus id purus dolor dolor. Sagittis at vulputate
-                  rhoncus pharetra purus vitae, ac. Sit nam eleifend mauris,
-                  duis mattis leo, ut. Viverra accumsan elementum vehicula orci
-                  magna. Elementum, euismod ut sed at ut non. Eget commodo mi
-                  scelerisque erat. Mus adipiscing et mattis vitae sapien
-                  turpis. Eu, sit urna, convallis in commodo, sed condimentum
-                  dictumst vitae. Ultricies aenean a non tincidunt tortor ut
-                  pulvinar. Vulputate viverra tempor sed turpis at blandit
-                  malesuada at quam. Enim cursus vitae turpis lectus egestas
-                  nunc risus.
+                  {ebook.description}
                 </div>
                 <div className="ebookDetail-detail-tag">
                   <button className="button">Biografi</button>

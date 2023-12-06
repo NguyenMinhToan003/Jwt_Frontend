@@ -3,9 +3,10 @@ import { ebookUpload } from "../../services/bookService";
 import { toast } from "react-toastify";
 import "./upload.scss";
 import VoteStar from "../../photo/voteStar";
-import Photo from "../../photo/photo-book2.png";
+import { useHistory } from "react-router-dom";
 import moment from "moment";
 const UploadFile = (props) => {
+  let history = useHistory();
   const [status, setStatus] = useState(false);
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
@@ -32,9 +33,19 @@ const UploadFile = (props) => {
       toast.success(response.EM);
     } else toast.error(response.EM);
   };
+  const handleCancel = () => {
+    history.push("/");
+  };
   return (
     <>
       <div className="upload">
+        <div
+          className="cancle btn btn-danger"
+          onClick={() => {
+            handleCancel();
+          }}>
+          Back
+        </div>
         {status && (
           <div
             className="btn btn-success upload-btn"

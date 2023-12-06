@@ -91,8 +91,11 @@
         text-transform: capitalize;
         &-name {
           color: #000;
+          font-family: Rubik;
           font-size: 57px;
+          font-style: normal;
           font-weight: 500;
+          line-height: normal;
           text-transform: capitalize;
         }
         &-number {

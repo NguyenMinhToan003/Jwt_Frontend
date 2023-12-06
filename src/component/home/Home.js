@@ -32,10 +32,10 @@ const Home = (props) => {
             <span className="title">This new story</span>
 
             <div className="list-book1">
-              {/* <Ebook1 />
               <Ebook1 />
               <Ebook1 />
-              <Ebook1 /> */}
+              <Ebook1 />
+              <Ebook1 />
             </div>
             <span className="title">Which they like</span>
             <div className="list-book2">

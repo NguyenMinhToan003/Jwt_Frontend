@@ -12,3 +12,12 @@
     grid-auto-rows: minmax(338px, auto);
   }
 }
+.paginate {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+.pagination {
+  margin: 0 auto;
+}

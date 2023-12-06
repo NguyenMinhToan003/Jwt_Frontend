@@ -1,10 +1,8 @@
 import VoteStar from "../../photo/voteStar";
-import photoBookImage from "../../photo/photo-book2.png";
 import "./buyEb.scss";
 import { NavLink } from "react-router-dom";
-import Header from "../Header/Header";
 const BuyEb = (props) => {
-  console.log(props.img);
+  let link = `/detailBook?id=${props.id}`;
   return (
     <>
       <div className="buyEb">
@@ -21,7 +19,7 @@ const BuyEb = (props) => {
             <span>1,988,288 voters</span>
           </div>
           <span className="buyEb-text">{props.description.slice(0, 100)}</span>
-          <NavLink to="/detailBook" className="buyEb-button">
+          <NavLink to={link} className="buyEb-button">
             Buy now
           </NavLink>
         </div>
