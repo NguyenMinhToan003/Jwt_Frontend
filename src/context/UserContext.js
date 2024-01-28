@@ -7,7 +7,7 @@ const UserProvider = ({ children }) => {
     isLoading: true,
     isAutheticated: false,
     token: "",
-    acount: { email: "", name: "", groupWithRole: "" },
+    acount: { email: "", name: "", groupWithRole: "", id: "" },
   };
   const [dataUser, setUser] = useState(userDefault);
   const loginContext = (userData) => {
@@ -18,14 +18,16 @@ const UserProvider = ({ children }) => {
   };
   const fetchUser = async () => {
     let response = await getAccount();
+    console.log(response);
     if (response && +response.EC === 0) {
       let email = response.DT.email;
       let name = response.DT.name;
       let groupWithRole = response.DT.groupWithRole.Roles;
+      let id = response.DT.id;
       let data = {
         isAutheticated: true,
         token: response.DT.acess_token,
-        account: { email, name, groupWithRole },
+        account: { email, name, groupWithRole, id },
         isLoading: false,
       };
       setUser(data);

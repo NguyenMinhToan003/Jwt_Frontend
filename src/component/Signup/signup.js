@@ -12,7 +12,7 @@ const SignUp = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [groupId, setGroupId] = useState(3);
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState(1);
   const [name, setName] = useState("");
   const [repass, setRepass] = useState("");
   const [objectCheckInput, setObjectCheckInput] = useState({
@@ -233,7 +233,9 @@ const SignUp = () => {
             onChange={(event) => {
               setGender(event.target.value);
             }}>
-            <option value={0}>Male</option>
+            <option value={0} selected>
+              Male
+            </option>
             <option value={1}>Famale</option>
           </select>
 
@@ -250,8 +252,8 @@ const SignUp = () => {
             onChange={(event) => {
               setGroupId(event.target.value);
             }}>
-            <option value={1}>Developer</option>
-            <option value={2}>Leader</option>
+            <option value={1}>Leader</option>
+            <option value={2}>Developer</option>
             <option value={3} selected>
               Guest
             </option>

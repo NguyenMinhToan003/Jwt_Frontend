@@ -19,7 +19,6 @@ const Login = (props) => {
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
-
     let response = await loginAccount(account, password);
     setCheckObejctInput({ account: true, password: true });
     if (account === "") {
@@ -34,10 +33,11 @@ const Login = (props) => {
         let name = response.DT.name;
         let groupWithRole = response.DT.groupWithRole.Roles;
         let token = response.DT.acess_token;
+        let id = response.DT.id;
         let data = {
           isAutheticated: true,
           token: token,
-          account: { email, name, groupWithRole },
+          account: { email, name, groupWithRole, id },
         };
         localStorage.setItem("jwt", token);
         loginContext(data);
