@@ -147,7 +147,7 @@ const UploadFile = (props) => {
                 </span>
                 <div className="upload-output-main-info-author">
                   <span className="author">
-                    {author ? author : "by Fiersa besari"}
+                    By {author ? author : " Fiersa besari"}
                   </span>
                   <span className="date">
                     {date ? date.format("D MMMM YYYY") : "1 juli 2016"}

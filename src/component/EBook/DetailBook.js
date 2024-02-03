@@ -12,17 +12,21 @@ import moment from "moment";
 const DetailEbook = (props) => {
   var queryString = window.location.search;
   const [ebook, setEbook] = useState({});
+  const [personUpload, setPersonUpload] = useState({});
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const fetchData = async () => {
     let response = await ebookDetail(queryString);
     if (response && +response.EC === 0) {
       var dateString = response.DT.date;
       var formattedDate = moment(dateString).format("D MMMM YYYY");
       setEbook({ ...response.DT, date: formattedDate });
+      setPersonUpload(response.DT.datausers[0]);
     } else toast.error(response.EM);
   };
-  useEffect(() => {
-    fetchData();
-  }, []);
+
   let history = useHistory();
   const handlerCancel = () => {
     history.push("/buyEbook");
@@ -41,7 +45,7 @@ const DetailEbook = (props) => {
                   <div className="ebook-main-info-container">
                     <span className="ebook-main-info-name">{ebook.name}</span>
                     <div className="ebook-main-info-detail">
-                      <span>{ebook.author}</span>
+                      <span>By {ebook.author}</span>
                       <span>{ebook.date}</span>
                       <div>
                         <VoteStar n={ebook.vote} />
@@ -89,6 +93,9 @@ const DetailEbook = (props) => {
           </div>
         </div>
         <div className="ebookDetail-header"></div>
+        <div className="person-upload">
+          <span>{personUpload.name}</span>
+        </div>
         <div
           className="cancel"
           onClick={() => {

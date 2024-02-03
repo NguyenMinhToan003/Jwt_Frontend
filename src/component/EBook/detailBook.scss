@@ -191,3 +191,24 @@
     }
   }
 }
+.person-upload {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 20px;
+  color: black;
+  line-height: 1.43;
+  letter-spacing: 0.048px;
+  font-size: 23px;
+  line-height: 0.92;
+  letter-spacing: 0.075px;
+  z-index: 1000;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #dedede;
+  padding-left: 70px;
+  transition: all 0.25 step-end;
+  &:hover {
+    color: rgba(0, 0, 0, 0.3);
+  }
+}

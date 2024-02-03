@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import "./user.scss";
 import { updateUser } from "../../services/userService";
 import Modal from "react-bootstrap/Modal";
-import { add } from "lodash";
 const ModelEdit = (props) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -15,6 +14,8 @@ const ModelEdit = (props) => {
   const [objectCheckInput, setObjectCheckInput] = useState({
     groupId: true,
   });
+
+  const [useAlert, setUseAlert] = useState(`EDIT`);
   useEffect(() => {
     setEmail(props.user.email);
     setPhone(props.user.phone);
