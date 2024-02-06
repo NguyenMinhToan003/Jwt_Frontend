@@ -17,8 +17,12 @@
   }
 }
 .nav-link {
-  color: black !important;
+  color: rgba(0, 0, 0, 0.523) !important;
   &:hover {
     color: #61dafb !important;
   }
+}
+.active {
+  color: black !important;
+  border-bottom: 3px white solid;
 }

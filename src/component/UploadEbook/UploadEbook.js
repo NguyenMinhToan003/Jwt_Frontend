@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ebookUpload } from "../../services/bookService";
 import { toast } from "react-toastify";
 import "./upload.scss";
 import VoteStar from "../../photo/voteStar";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 import moment from "moment";
 const UploadFile = (props) => {
+  let { dataUser } = useContext(UserContext);
+  const id = dataUser.account.id;
   let history = useHistory();
   const [status, setStatus] = useState(false);
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [des, setDes] = useState("");
-  const [vote, setVote] = useState(0);
+  const [vote, setVote] = useState(5);
   const [file, setFile] = useState();
   const [img, setImg] = useState();
   const [date, setDate] = useState(moment());
@@ -28,6 +31,7 @@ const UploadFile = (props) => {
     formData.append("author", author);
     formData.append("vote", vote);
     formData.append("description", des);
+    formData.append("user", id);
     let response = await ebookUpload(formData);
     if (response && +response.EC === 0) {
       toast.success(response.EM);
@@ -109,6 +113,7 @@ const UploadFile = (props) => {
                   placeholder="Hint number"
                   min="0"
                   max="5"
+                  value={vote}
                   onChange={(event) => {
                     setVote(+event.target.value);
                   }}
@@ -142,7 +147,7 @@ const UploadFile = (props) => {
                 </span>
                 <div className="upload-output-main-info-author">
                   <span className="author">
-                    {author ? author : "by Fiersa besari"}
+                    By {author ? author : " Fiersa besari"}
                   </span>
                   <span className="date">
                     {date ? date.format("D MMMM YYYY") : "1 juli 2016"}

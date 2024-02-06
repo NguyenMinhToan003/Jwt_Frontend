@@ -39,12 +39,25 @@
         border-right: 0.8px #dedede solid;
       }
       &-bag {
+        position: relative;
         cursor: pointer;
         margin: 0px 20px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 20px;
+        &-num {
+          text-align: center;
+          width: 20px;
+          height: 20px;
+          font-size: 15px;
+          position: absolute;
+          top: -50%;
+          right: -50%;
+          background-color: red;
+          border-radius: 100rem;
+          color: white;
+        }
       }
     }
     &-right {
@@ -95,12 +108,13 @@
     position: relative;
     input {
       background: #f5f6f8;
-      width: 100%;
+      width: calc(100% - 15px);
       color: rgba(0, 0, 0, 0.3);
       font-family: Karla;
       font-size: 16px;
       border: 0;
       outline: none;
+      margin-left: 10px;
     }
 
     ::-webkit-input-placeholder,
@@ -122,9 +136,6 @@
   }
 }
 
-.active {
-  border-bottom: 3px white solid;
-}
 .dot {
   position: absolute;
   bottom: 2px;
