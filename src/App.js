@@ -8,6 +8,7 @@ import NavHeader from "./component/Navigation/NavHeader";
 import NavShop from "./component/Navigation/NavShop";
 import { AppRouter } from "./router/AppRouter";
 import { ColorRing } from "react-loader-spinner";
+import store from "./redux/store";
 
 function App() {
   let { dataUser } = useContext(UserContext);
