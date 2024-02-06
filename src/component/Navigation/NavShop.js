@@ -17,12 +17,13 @@ const NavShop = (props) => {
               <span className="crt">BOOK</span>
             </div>
             <div className="navshop-menu-left-bag">
-              <Bag />
-              <NavLink to="/book/upload">
-                <Add />
-              </NavLink>
+              <div className="navshop-menu-left-bag-num">4</div> <Bag />
             </div>
+            <NavLink to="/book/upload">
+              <Add />
+            </NavLink>
           </div>
+
           <div className="navshop-menu-right">
             <NavLink to="/" exact className="navshop-menu-right-link">
               Home
