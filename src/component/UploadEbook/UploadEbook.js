@@ -8,7 +8,8 @@ import { UserContext } from "../../context/UserContext";
 import moment from "moment";
 const UploadFile = (props) => {
   let { dataUser } = useContext(UserContext);
-  const id = dataUser.account.id;
+  let id = dataUser.account.id;
+  console.log(dataUser.account.id);
   let history = useHistory();
   const [status, setStatus] = useState(false);
   const [name, setName] = useState("");
@@ -32,13 +33,17 @@ const UploadFile = (props) => {
     formData.append("vote", vote);
     formData.append("description", des);
     formData.append("user", id);
+    console.log(formData);
     let response = await ebookUpload(formData);
     if (response && +response.EC === 0) {
-      toast.success(response.EM);
+      {
+        toast.success(response.EM);
+        history.push("/buyEbook");
+      }
     } else toast.error(response.EM);
   };
   const handleCancel = () => {
-    history.push("/");
+    history.push("/buyEbook");
   };
   return (
     <>

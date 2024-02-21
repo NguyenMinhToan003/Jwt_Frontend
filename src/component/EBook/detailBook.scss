@@ -113,7 +113,7 @@
       &-button {
         display: flex;
         align-items: center;
-        justify-content: start;
+        justify-content: flex-start;
         gap: 20px;
         &-buy {
           padding: 12px 28px;
@@ -162,7 +162,7 @@
       margin: 54px 0px;
       display: flex;
       align-items: center;
-      justify-content: start;
+      justify-content: flex-start;
       gap: 25px;
       .button {
         color: rgba(0, 0, 0, 0.3);
