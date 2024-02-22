@@ -7,7 +7,7 @@ const UserProvider = ({ children }) => {
     isLoading: true,
     isAutheticated: false,
     token: "",
-    acount: { email: "", name: "", groupWithRole: "", id: "" },
+    acount: { email: "", name: "", groupWithRole: "", id: -1 },
   };
   const [dataUser, setUser] = useState(userDefault);
   const loginContext = (userData) => {
@@ -18,7 +18,7 @@ const UserProvider = ({ children }) => {
   };
   const fetchUser = async () => {
     let response = await getAccount();
-    console.log(response);
+
     if (response && +response.EC === 0) {
       let email = response.DT.email;
       let name = response.DT.name;
@@ -38,6 +38,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     fetchUser();
   }, []);
+  console.log("This is usecontext ", dataUser);
   return (
     <UserContext.Provider value={{ dataUser, loginContext, logoutContext }}>
       {children}

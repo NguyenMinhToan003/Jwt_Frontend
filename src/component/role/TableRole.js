@@ -24,7 +24,6 @@ const TableRole = (props) => {
   const handlePageClick = (event) => {
     setPage(event.selected + 1);
     fetchRole();
-    console.log(event.selected + 1);
   };
   return (
     <>

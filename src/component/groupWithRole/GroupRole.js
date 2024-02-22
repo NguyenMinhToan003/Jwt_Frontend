@@ -17,10 +17,7 @@ const GroupRole = (props) => {
     fetchGroup();
   }, []);
 
-  useEffect(() => {
-    console.log(group);
-    console.log(choose);
-  }, [group, choose]);
+  // useEffect(() => {}, [group, choose]);
 
   const fetchGroupWithRole = async () => {
     let response = await readGroupWithRole(choose);
