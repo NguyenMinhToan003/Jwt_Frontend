@@ -6,7 +6,10 @@ import Bag from "../../photo/Bag";
 import { NavLink } from "react-router-dom";
 import Dot from "../../photo/dot";
 import Add from "../../photo/Add";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 const NavShop = (props) => {
+  const { cart } = useContext(CartContext);
   return (
     <>
       <div className="navshop">
@@ -16,9 +19,14 @@ const NavShop = (props) => {
               <span>MY</span>
               <span className="crt">BOOK</span>
             </div>
-            <div className="navshop-menu-left-bag">
-              <div className="navshop-menu-left-bag-num">4</div> <Bag />
-            </div>
+            <NavLink to="/cart" className="navshop-menu-left-bag">
+              {cart.length !== 0 ? (
+                <div className="navshop-menu-left-bag-num">{cart.length}</div>
+              ) : (
+                ""
+              )}
+              <Bag />
+            </NavLink>
             <NavLink to="/book/upload">
               <Add />
             </NavLink>

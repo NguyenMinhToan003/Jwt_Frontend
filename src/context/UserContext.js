@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAccount } from "../services/userService";
 const UserContext = React.createContext({ name: "Toan", auth: false });
-
 const UserProvider = ({ children }) => {
   let userDefault = {
     isLoading: true,
@@ -38,7 +37,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     fetchUser();
   }, []);
-  console.log("This is usecontext ", dataUser);
+
   return (
     <UserContext.Provider value={{ dataUser, loginContext, logoutContext }}>
       {children}

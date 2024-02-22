@@ -30,7 +30,7 @@ const BuyEbook = (props) => {
   return (
     <>
       <NavShop />
-      <div className=" mt-5 ebook home">
+      <div className=" mt-10 ebook home">
         <Category />
         <div className="container">
           <div className="ebook-list">

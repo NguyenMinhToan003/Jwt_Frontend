@@ -9,7 +9,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import moment from "moment";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+import NavShopLite from "../Navigation/NavShopLite";
+
 const DetailEbook = (props) => {
+  let history = useHistory();
+  const { addToCart, cart } = useContext(CartContext);
   var queryString = window.location.search;
   const [ebook, setEbook] = useState({});
   const [personUpload, setPersonUpload] = useState({});
@@ -27,13 +33,18 @@ const DetailEbook = (props) => {
     } else toast.error(response.EM);
   };
 
-  let history = useHistory();
   const handlerCancel = () => {
     history.push("/buyEbook");
+  };
+
+  const HandlerButtonBuy = () => {
+    addToCart({ id: ebook.id, count: 1 });
+    toast.success("add to cart ");
   };
   return (
     <>
       <div className="ebookDetail">
+        <NavShopLite />
         <div>
           <div className="ebookDetail-content">
             <div className="ebookDetail-main">
@@ -58,7 +69,11 @@ const DetailEbook = (props) => {
                   </div>
 
                   <div className="ebook-main-button">
-                    <button className="ebook-main-button-buy">Buy now</button>
+                    <button
+                      className="ebook-main-button-buy"
+                      onClick={() => HandlerButtonBuy()}>
+                      Buy now
+                    </button>
                     <button className="ebook-main-button-read">
                       read book
                     </button>
