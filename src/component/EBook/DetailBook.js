@@ -15,7 +15,7 @@ import NavShopLite from "../Navigation/NavShopLite";
 
 const DetailEbook = (props) => {
   let history = useHistory();
-  const { addToCart, cart } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   var queryString = window.location.search;
   const [ebook, setEbook] = useState({});
   const [personUpload, setPersonUpload] = useState({});
@@ -34,7 +34,7 @@ const DetailEbook = (props) => {
   };
 
   const handlerCancel = () => {
-    history.push("/buyEbook");
+    history.goBack();
   };
 
   const HandlerButtonBuy = () => {

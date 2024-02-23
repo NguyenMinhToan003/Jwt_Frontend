@@ -1,9 +1,58 @@
 .cart {
-  max-width: 1020px;
-  padding: 10px 15px;
-  margin: 80px auto 10px;
-  background-color: #f4f7fc;
   font-family: Inter;
+  background-color: #e5e5e5;
+  &-container {
+    max-width: 1020px;
+    padding: 10px 15px;
+    margin: 80px auto 10px;
+    border: 8px;
+  }
+  &-cancel {
+    cursor: pointer;
+    background-color: #2e3b52;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    padding: 4px;
+    transition: all 1s ease;
+    &:hover {
+      transform: translate(2px, 3px);
+      background-color: #606f89;
+      border-radius: 15px;
+    }
+  }
+  &-filter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    height: 40px;
+    padding: 10px 10px 10px 20px;
+    border-radius: 4px;
+    background-color: #dae1ec;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    &-input {
+      border: 0;
+      outline: none;
+      background-color: inherit;
+    }
+  }
+  &-btnSubmint {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    width: 148px;
+    height: 40px;
+    transition: all 1s ease;
+    &:hover {
+      transform: translate3d(2px, 2px, 200px);
+      background-color: #606f89;
+      border-radius: 4px;
+    }
+  }
   &-table {
     display: flex;
     justify-content: start;
@@ -11,7 +60,6 @@
     display: grid;
     grid-template-columns: repeat(8, (1fr));
     height: 45px;
-    padding-left: 5px;
     div {
       display: flex;
       justify-content: center;
@@ -21,11 +69,16 @@
     }
   }
   &-list {
-    :nth-child(odd) {
-      background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #f4f7fc;
+    // border: 2px solid #2e3b52;
+    :nth-child(4) {
+      color: #008400;
     }
-    :nth-child(even) {
-      background-color: #f4f7fc;
+    :nth-child(7) {
+      color: #e01a1a;
     }
   }
 
@@ -33,21 +86,35 @@
     font-size: 14px;
     line-height: 16.94px;
     color: #2e3b52;
-    font-weight: 500;
+    font-weight: 500 !important;
     min-height: 200px;
-    border-top: 2px solid #2e3b52;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    &-img {
+      background-color: #000;
+      background: lightgray 50% / cover no-repeat;
+      box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.2);
+    }
+    &-price {
+      color: #008400;
+    }
+    &-totalP {
+      color: #e01a1a;
+    }
   }
   &-title {
+    border: 2px solid #2e3b52;
+
     text-transform: uppercase;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 600 !important;
     line-height: 15px;
     letter-spacing: 0.05em;
     background-color: #ffffff;
+    color: #606f89;
+
     div {
-      &:hover {
-        box-shadow: 0px 4px 4px 0px #00000040;
-      }
+      text-shadow: 0px 4px 4px 0px #00000040;
+      box-shadow: 0px 4px 4px 0px #00000040;
     }
   }
 }
