@@ -2,11 +2,12 @@ import Action from "../../photo/action";
 import "./cart.scss";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../context/CartContext";
-import { cartLoad } from "../../services/cartService";
+import { cartLoad, cartSearch } from "../../services/cartService";
 import VoteStar from "../../photo/voteStar";
 import Search from "../../photo/search";
 import Cancel from "../../photo/CancelIcon";
 import { useHistory } from "react-router-dom";
+
 const MainCart = (props) => {
   let history = useHistory();
   let { cart, updateListCart, addToCart, delToCart } = useContext(CartContext);
@@ -37,17 +38,6 @@ const MainCart = (props) => {
     return propData;
   };
 
-  //handler cart context
-  const handlerDataCartContextUpdate = (data) => {
-    let propData = [...data];
-    propData.map((item, index) => {
-      let count = item.count;
-      let id = item.id;
-      propData[index] = { id, count };
-    });
-    return propData;
-  };
-
   const hanlderCountUp = (ebook) => {
     addToCart({ ...ebook, count: 1 });
   };
@@ -59,10 +49,16 @@ const MainCart = (props) => {
     // delToCart({ ...item, count: 1 });
   };
   const hanlderPopupPayment = () => {
-    console.log("Payment: ", listCart);
+    console.log(">>>>>>Payment: ", listCart);
   };
   const handlerCancelPage = () => {
     history.goBack();
+  };
+
+  const hanlderSearchEbook = async (event) => {
+    let key = event.target.value;
+    let data = await cartSearch({ key: key, offset: 0, limit: 5 });
+    console.log("<<<<", data);
   };
   return (
     <>
@@ -72,7 +68,11 @@ const MainCart = (props) => {
         </div>
         <div className="cart-filter">
           <Search />
-          <input className="cart-filter-input " placeholder="Search" />
+          <input
+            className="cart-filter-input "
+            placeholder="Search"
+            onChange={(event) => hanlderSearchEbook(event)}
+          />
         </div>
         <button
           className="btn btn-primary cart-btnSubmint"
