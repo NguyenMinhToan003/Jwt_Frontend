@@ -5,11 +5,13 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 import { UserProvider } from "./context/UserContext";
-
+import { CartProvider } from "./context/CartContext";
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-      <App />
+      <CartProvider>
+        <App />
+      </CartProvider>
     </UserProvider>
   </React.StrictMode>,
   document.getElementById("root")

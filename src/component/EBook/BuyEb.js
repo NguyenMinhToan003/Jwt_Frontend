@@ -1,6 +1,7 @@
 import VoteStar from "../../photo/voteStar";
 import "./buyEb.scss";
 import { NavLink } from "react-router-dom";
+
 const BuyEb = (props) => {
   let link = `/detailBook?id=${props.id}`;
   return (

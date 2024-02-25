@@ -19,6 +19,8 @@ const UploadFile = (props) => {
   const [file, setFile] = useState();
   const [img, setImg] = useState();
   const [date, setDate] = useState(moment());
+  const [price, setPrice] = useState(999);
+  const [mount, setMount] = useState(999);
   const handlePriview = () => {
     if (!name || !author || !des || !vote || !file || !date) return;
     setStatus(true);
@@ -33,7 +35,8 @@ const UploadFile = (props) => {
     formData.append("vote", vote);
     formData.append("description", des);
     formData.append("user", id);
-    console.log(formData);
+    formData.append("amount", mount);
+    formData.append("price", price);
     let response = await ebookUpload(formData);
     if (response && +response.EC === 0) {
       {
@@ -120,10 +123,34 @@ const UploadFile = (props) => {
                   max="5"
                   value={vote}
                   onChange={(event) => {
-                    setVote(+event.target.value);
+                    setVote(+event.target.value > 5 ? 5 : +event.target.value);
                   }}
                 />
               </div>
+            </div>
+            <div className="upload-input-vote">
+              <span>Price</span>
+              <input
+                type="number"
+                placeholder="Hint number"
+                value={price}
+                min="0"
+                onChange={(event) => {
+                  setPrice(+event.target.value);
+                }}
+              />
+            </div>
+            <div className="upload-input-vote">
+              <span>Mount</span>
+              <input
+                type="number"
+                placeholder="Hint number"
+                value={mount}
+                min="1"
+                onChange={(event) => {
+                  setMount(+event.target.value);
+                }}
+              />
             </div>
             <input
               type="file"

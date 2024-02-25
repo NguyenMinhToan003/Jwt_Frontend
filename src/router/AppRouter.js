@@ -10,6 +10,7 @@ import Home from "../component/home/Home";
 import DetailEbook from "../component/EBook/DetailBook";
 import UploadEbook from "../component/UploadEbook/UploadEbook";
 import UploadFile from "../component/test/uploadFile";
+import MainCart from "../component/Cart/cart";
 
 const AppRouter = (props) => {
   return (
@@ -17,6 +18,7 @@ const AppRouter = (props) => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/test" component={UploadFile} />
+        <PrivateRouter path="/cart" component={MainCart} />
         <PrivateRouter path="/book/upload" component={UploadEbook} />
         <PrivateRouter path="/detailBook" component={DetailEbook} />
         <PrivateRouter path="/group" component={Group} />

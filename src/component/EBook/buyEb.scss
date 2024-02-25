@@ -51,6 +51,10 @@
     letter-spacing: 0.048px;
   }
   &-button {
+    position: absolute;
+    right: 44px;
+    left: 100px;
+    bottom: 44px;
     padding: 12px;
     text-align: center;
     color: #ff971d;
