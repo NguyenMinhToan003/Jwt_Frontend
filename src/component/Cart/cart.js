@@ -7,20 +7,24 @@ import VoteStar from "../../photo/voteStar";
 import Search from "../../photo/search";
 import Cancel from "../../photo/CancelIcon";
 import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const MainCart = (props) => {
   let history = useHistory();
-  let { cart, updateListCart, addToCart, delToCart } = useContext(CartContext);
+  let { cart, addToCart, delToCart } = useContext(CartContext);
   const [listCart, setlistCart] = useState(cart);
+  const [listSearchCart, setListSearchCart] = useState([]);
 
+  //first call api in server
   useEffect(() => {
     fetchListCart();
   }, []);
+
+  // hanlder data to Context
   useEffect(() => {
     setlistCart(handlerDataFetch(listCart));
   }, [cart]);
 
-  // handler first run
   const fetchListCart = async () => {
     let response = await cartLoad(cart);
     if (response && +response.EC === 0) {
@@ -45,9 +49,7 @@ const MainCart = (props) => {
   const hanlderCountDown = (ebook) => {
     delToCart({ ...ebook, count: 1 });
   };
-  const handlerAction = (item) => {
-    // delToCart({ ...item, count: 1 });
-  };
+  const handlerAction = (item) => {};
   const hanlderPopupPayment = () => {
     console.log(">>>>>>Payment: ", listCart);
   };
@@ -55,10 +57,32 @@ const MainCart = (props) => {
     history.goBack();
   };
 
+  // debounce func
+  const debounce = (callback, delay) => {
+    let debounceTimer = null;
+    return (...args) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        callback(...args);
+      }, delay);
+    };
+  };
+
+  const funcSearch = debounce(async (event) => {
+    console.log("Keywords>>>>", event.target.value);
+    let response = await cartSearch({
+      key: event.target.value,
+      offset: 0,
+      limit: 5,
+    });
+    response && +response.EC === 0 && setListSearchCart(response.DT);
+  }, 1000);
+
+  useEffect(() => {
+    console.log("respose: ", listSearchCart);
+  }, [listSearchCart]);
   const hanlderSearchEbook = async (event) => {
-    let key = event.target.value;
-    let data = await cartSearch({ key: key, offset: 0, limit: 5 });
-    console.log("<<<<", data);
+    funcSearch(event);
   };
   return (
     <>
@@ -73,6 +97,41 @@ const MainCart = (props) => {
             placeholder="Search"
             onChange={(event) => hanlderSearchEbook(event)}
           />
+          {listSearchCart && listSearchCart.length > 0 && (
+            <ul className="cart-filter-list">
+              <li className="cart-filter-list-title" key="title-search">
+                <span>Code</span>
+                <span>Name</span>
+                <span>Ebook</span>
+                <span>Price</span>
+                <span>Rating</span>
+              </li>
+              {listSearchCart &&
+                listSearchCart.map((item, index) => {
+                  let link = `/detailBook?id=${item.id}`;
+                  return (
+                    <NavLink to={link}>
+                      <li
+                        className={
+                          (index + 1) / 2 === 0
+                            ? "cart-filter-list-item cart-filter-list-item-odd"
+                            : "cart-filter-list-item cart-filter-list-item-even"
+                        }
+                        key={item.id + 100}>
+                        <span>{item.id}</span>
+                        <span>{item.name}</span>
+                        <div>
+                          <img src={item.urlImage} alt={item.name} />
+                        </div>
+                        <span>{item.price}</span>
+                        <span>{item.vote}</span>
+                      </li>
+                    </NavLink>
+                  );
+                })}
+              <span>Find :{listCart.length}</span>
+            </ul>
+          )}
         </div>
         <button
           className="btn btn-primary cart-btnSubmint"

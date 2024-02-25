@@ -51,10 +51,14 @@ const CartProvider = ({ children }) => {
   const updateListCart = (cartNow) => {
     setCart(cartNow);
   };
+  const logoutCart = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
+  };
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, delToCart, updateListCart }}>
+      value={{ cart, addToCart, delToCart, updateListCart, logoutCart }}>
       {children}
     </CartContext.Provider>
   );

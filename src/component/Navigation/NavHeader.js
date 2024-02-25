@@ -8,9 +8,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { logoutAccount } from "../../services/registerService";
+import { CartContext } from "../../context/CartContext";
 import Bag from "../../photo/Bag";
 const NavHeader = () => {
   const { dataUser, logoutContext } = useContext(UserContext);
+  const { logoutCart } = useContext(CartContext);
   const location = useLocation();
   let history = useHistory();
   const handlerLogout = async () => {
@@ -18,8 +20,9 @@ const NavHeader = () => {
     localStorage.removeItem("jwt");
     if (logout && logout.EC === +0) {
       history.push("/login");
-      toast.info("logout done!");
+      logoutCart();
       logoutContext();
+      toast.info("logout done!");
     } else {
       toast.error("ERORR logout");
     }
