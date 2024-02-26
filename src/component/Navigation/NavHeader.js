@@ -12,7 +12,7 @@ import { CartContext } from "../../context/CartContext";
 import Bag from "../../photo/Bag";
 const NavHeader = () => {
   const { dataUser, logoutContext } = useContext(UserContext);
-  const { logoutCart } = useContext(CartContext);
+  const { logoutCart, cart } = useContext(CartContext);
   const location = useLocation();
   let history = useHistory();
   const handlerLogout = async () => {
@@ -36,9 +36,10 @@ const NavHeader = () => {
       <Navbar expand="lg" className="bg-body-tertiary nav">
         <Container>
           <Navbar.Brand className="nav-brand">React</Navbar.Brand>
-          <Navbar>
+          <NavLink to="/cart" className="navshop-menu-left-bag">
+            {cart.length !== 0 ? <div className="num">{cart.length}</div> : ""}
             <Bag />
-          </Navbar>
+          </NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto ">

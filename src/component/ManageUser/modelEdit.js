@@ -15,7 +15,7 @@ const ModelEdit = (props) => {
     groupId: true,
   });
 
-  const [useAlert, setUseAlert] = useState(`EDIT`);
+  // const [useAlert, setUseAlert] = useState(`EDIT`);
   useEffect(() => {
     setEmail(props.user.email);
     setPhone(props.user.phone);

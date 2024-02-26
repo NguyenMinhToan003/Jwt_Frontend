@@ -1,11 +1,11 @@
 import Category from "../home/Category";
 import BuyEb from "../EBook/BuyEb";
 import "./buyEbook.scss";
-import Header from "../Header/Header";
 import NavShop from "../Navigation/NavShop";
 import { ebookRead } from "../../services/bookService";
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
+import Footer from "../footer/footer";
 
 const BuyEbook = (props) => {
   const [page, setPage] = useState(1);
@@ -74,7 +74,7 @@ const BuyEbook = (props) => {
           </div>
         </div>
       </div>
-      <Header />
+      <Footer />
     </>
   );
 };

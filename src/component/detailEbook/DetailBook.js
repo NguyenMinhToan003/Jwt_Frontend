@@ -1,5 +1,5 @@
 import "./detailBook.scss";
-import Ebook3 from "./Ebook3";
+import Ebook3 from "../EBook/Ebook3";
 import Dot from "../../photo/dot";
 import Cancel from "../../photo/CancelIcon";
 import VoteStar from "../../photo/voteStar";

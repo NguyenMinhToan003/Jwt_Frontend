@@ -1,6 +1,6 @@
 .ebookDetail {
   position: relative;
-  padding: 85px;
+  padding: 30px;
   &-header {
     z-index: -3;
     position: absolute;
@@ -8,14 +8,22 @@
     left: 0;
     right: 0;
     height: 580px;
-    background: #14ae5c;
+    background-color: #2e3b52;
   }
   .cancel {
     cursor: pointer;
+    background-color: #2e3b52;
     position: absolute;
-    border-radius: 100rem;
-    top: 70px;
-    left: 85px;
+    top: 30px;
+    left: 20px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    padding: 4px;
+    transition: all 1s ease;
+    &:hover {
+      transform: translate(2px, 3px);
+      background-color: #606f89;
+      border-radius: 15px;
+    }
   }
   .dot {
     z-index: -1;

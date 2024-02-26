@@ -26,3 +26,18 @@
   color: black !important;
   border-bottom: 3px white solid;
 }
+.num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  font-size: 15px;
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  background-color: red;
+  border-radius: 100rem;
+  color: white;
+}
