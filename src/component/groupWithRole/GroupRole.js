@@ -22,7 +22,6 @@ const GroupRole = (props) => {
   const fetchGroupWithRole = async () => {
     let response = await readGroupWithRole(choose);
     setCurrentRole(response.DT);
-    console.log("Roles : ", response);
   };
   const handlerChooseGroup = (value) => {
     setChoose({ id: value.id });

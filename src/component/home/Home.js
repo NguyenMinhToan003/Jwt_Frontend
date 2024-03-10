@@ -1,14 +1,14 @@
 import Category from "./Category";
-import Ebook1 from "../EBook/Ebook1";
-import Ebook2 from "../EBook/Ebook2";
+import Ebook1 from "../EBookComponent/Ebook1";
+import Ebook2 from "../EBookComponent/Ebook2";
 import "./home.scss";
-import Footer from "../footer/footer";
+import Header from "../Header/Header";
 import NavHeader from "../Navigation/NavShop";
 
 const Home = (props) => {
   return (
     <>
-      <NavHeader />
+      <NavShop />
       <div className=" mt-5 home">
         <Category />
         <div className="home-content">

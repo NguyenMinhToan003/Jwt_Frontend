@@ -1,4 +1,7 @@
 import "./navShop.scss";
+import Search from "../../photo/search";
+import FilterNavShop from "../../photo/filterNavShop";
+import PhotoBook from "../../photo/book.png";
 import Bag from "../../photo/Bag";
 import { NavLink } from "react-router-dom";
 import Add from "../../photo/Add";
@@ -26,7 +29,6 @@ const NavShopLite = (props) => {
           <NavLink to="/book/upload">
             <Add />
           </NavLink>
-          <NavSearch />
         </div>
         <div className="navshop-menu-right">
           <NavLink to="/" exact className="navshop-menu-right-link">

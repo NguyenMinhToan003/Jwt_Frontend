@@ -1,6 +1,7 @@
 import Category from "../home/Category";
-import BuyEb from "../EBook/BuyEb";
+import BuyEbookItem from "./BuyEbookItem";
 import "./buyEbook.scss";
+import Header from "../Header/Header";
 import NavShop from "../Navigation/NavShop";
 import { ebookRead } from "../../services/bookService";
 import { useState, useEffect } from "react";
@@ -37,7 +38,7 @@ const BuyEbook = (props) => {
             {ebook && ebook.length > 0
               ? ebook.map((item, index) => {
                   return (
-                    <BuyEb
+                    <BuyEbookItem
                       key={item.id}
                       id={item.id}
                       img={item.urlImage}
