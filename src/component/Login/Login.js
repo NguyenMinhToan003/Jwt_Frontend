@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { loginAccount } from "../../services/registerService";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { UserContext } from "../../context/UserContext";
-
 const Login = (props) => {
   const { loginContext } = useContext(UserContext);
   let history = useHistory();

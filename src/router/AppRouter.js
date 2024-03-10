@@ -7,7 +7,7 @@ import { Switch, Route } from "react-router-dom";
 import PrivateRouter from "./PrivateRoute";
 import Group from "../component/group/Group";
 import Home from "../component/home/Home";
-import DetailEbook from "../component/EBook/DetailBook";
+import DetailEbook from "../component/detailEbook/DetailBook";
 import UploadEbook from "../component/UploadEbook/UploadEbook";
 import UploadFile from "../component/test/uploadFile";
 import MainCart from "../component/Cart/cart";

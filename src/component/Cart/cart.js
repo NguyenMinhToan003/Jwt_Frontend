@@ -78,9 +78,6 @@ const MainCart = (props) => {
     response && +response.EC === 0 && setListSearchCart(response.DT);
   }, 1000);
 
-  useEffect(() => {
-    console.log("respose: ", listSearchCart);
-  }, [listSearchCart]);
   const hanlderSearchEbook = async (event) => {
     funcSearch(event);
   };

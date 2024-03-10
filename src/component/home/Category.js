@@ -1,3 +1,4 @@
+import "./category.scss";
 const Category = (props) => {
   return (
     <>

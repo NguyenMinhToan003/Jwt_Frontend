@@ -1,8 +1,8 @@
 import VoteStar from "../../photo/voteStar";
-import "./buyEb.scss";
+import "./buyEbookItem.scss";
 import { NavLink } from "react-router-dom";
 
-const BuyEb = (props) => {
+const BuyEbookItem = (props) => {
   let link = `/detailBook?id=${props.id}`;
   return (
     <>
@@ -19,7 +19,7 @@ const BuyEb = (props) => {
             </div>
             <span>1,988,288 voters</span>
           </div>
-          <span className="buyEb-text">{props.description.slice(0, 100)}</span>
+          <span className="buyEb-text">{props.description}</span>
           <NavLink to={link} className="buyEb-button">
             Buy now
           </NavLink>
@@ -28,4 +28,4 @@ const BuyEb = (props) => {
     </>
   );
 };
-export default BuyEb;
+export default BuyEbookItem;

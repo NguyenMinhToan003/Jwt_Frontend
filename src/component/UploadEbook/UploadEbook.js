@@ -9,7 +9,7 @@ import moment from "moment";
 const UploadFile = (props) => {
   let { dataUser } = useContext(UserContext);
   let id = dataUser.account.id;
-  console.log(dataUser.account.id);
+
   let history = useHistory();
   const [status, setStatus] = useState(false);
   const [name, setName] = useState("");

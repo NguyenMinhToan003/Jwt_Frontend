@@ -3,7 +3,7 @@ import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import { createRole } from "../../services/permissionService";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TableRole from "./TableRole";
 import NavHeader from "../Navigation/NavHeader";
 
